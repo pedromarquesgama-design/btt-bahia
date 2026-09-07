@@ -434,7 +434,10 @@
       inset: 0;
       opacity: 0;
       pointer-events: none;
-      content-visibility: hidden;
+      /* NOTE: no content-visibility toggling here on purpose — the incoming
+         slide must stay rendered so its inner transform/opacity transition
+         has a before-state to animate from. Toggling it makes slides pop in
+         instantly and kills the push/fade effect. */
       contain: strict;
       /* No transform/opacity transition on the outer slide — only on the
          inner wrapper. This keeps the heavy grid layout (and its many
@@ -446,7 +449,6 @@
       opacity: 1;
       pointer-events: auto;
       z-index: 2;
-      content-visibility: visible;
     }
 
     /* Outgoing slide stays visible while it gets pushed out to the left */
@@ -454,7 +456,6 @@
       opacity: 1;
       pointer-events: none;
       z-index: 1;
-      content-visibility: visible;
     }
 
 
@@ -646,6 +647,15 @@
       background: rgba(245, 158, 11, 0.08);
     }
 
+    /* Master slide content sits a little higher now that the badge is gone */
+    .hero__content-layer .hero__content--master {
+      justify-content: center;
+      padding-bottom: calc(var(--space-8) + 32px + env(safe-area-inset-bottom, 0px));
+    }
+    .hero__content-layer .hero__content--master.active {
+      transform: translateY(-16px);
+    }
+
     .hero__title {
       font-family: var(--font-display);
       font-size: clamp(2.5rem, 10vw, var(--text-7xl));
@@ -721,9 +731,12 @@
        — marquee only, no title/description header —
        ============================================= */
     .testimonials-marquee {
-      background: var(--color-background);
+      background: transparent;
       color: var(--color-foreground);
-      padding: 3rem 0;
+      padding: 0 0 1.5rem;
+      margin-top: -2.5rem;
+      position: relative;
+      z-index: 3;
     }
 
     .testimonials-marquee__viewport {
@@ -787,7 +800,8 @@
 
     @media (min-width: 640px) {
       .testimonials-marquee {
-        padding: 4rem 0;
+        padding: 0 0 2rem;
+        margin-top: -3.5rem;
       }
       .testimonials-marquee__fade {
         display: block;
@@ -968,7 +982,10 @@
     /* =============================================
        MODALIDADES (Class Cards)
        ============================================= */
-    #modalidades { background: var(--color-background-alt); }
+    #modalidades {
+      background: var(--color-background-alt);
+      padding-top: 0;
+    }
 
     .modalidades__grid {
       display: grid;
@@ -1089,6 +1106,7 @@
       background: var(--color-background-alt);
       position: relative;
       overflow: hidden;
+      padding-bottom: var(--space-2);
     }
 
     .tradicao-metodo::before {
@@ -1340,23 +1358,7 @@
       background: var(--color-background);
       position: relative;
       overflow: hidden;
-    }
-
-    #quem-somos::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 40%;
-      height: 100%;
-      background: repeating-linear-gradient(
-        -45deg,
-        transparent,
-        transparent 60px,
-        rgba(220, 38, 38, 0.06) 60px,
-        rgba(220, 38, 38, 0.06) 120px
-      );
-      pointer-events: none;
+      padding-top: var(--space-8);
     }
 
     .quem-somos__inner {
@@ -1469,6 +1471,8 @@
        ============================================= */
     #horarios {
       background: var(--color-background-alt);
+      padding-top: var(--space-2);
+      padding-bottom: var(--space-4);
     }
 
     .horarios__table-wrapper {
@@ -1597,6 +1601,7 @@
        ============================================= */
     #faq {
       background: var(--color-background);
+      padding-top: 0;
     }
 
     .faq__list {
@@ -1955,7 +1960,7 @@
     /* Horários → FAQ divider: soft tonal fade, all screen sizes */
     .section-divider--mobile-only {
       display: block;
-      height: 80px;
+      height: 32px;
       background: linear-gradient(to bottom, var(--color-background-alt), var(--color-background));
       /* Overlap neighbors 1px so no hairline renders at either edge */
       margin-top: -1px;
@@ -2153,11 +2158,6 @@
         -webkit-animation-play-state: running;
         animation-play-state: running;
       }
-      /* Tap-to-pause toggle class (JS adds it touch-only) */
-      .testimonials-marquee__track.is-paused {
-        -webkit-animation-play-state: paused;
-        animation-play-state: paused;
-      }
       .testimonial-card {
         flex-shrink: 0;
       }
@@ -2276,7 +2276,6 @@
           </div>
         </div>
         <div class="container hero__content hero__content--master">
-          <span class="hero__badge">Mestres Certificados BTT</span>
           <h1 class="hero__title">Aprenda com<br>os Melhores<br><span>Mestres</span></h1>
           <p class="hero__subtitle">Supere seus limites, desenvolva sua técnica e seja parte de uma equipe vencedora.</p>
           <div class="hero__actions">
@@ -2309,8 +2308,6 @@
       <div class="testimonials-marquee__fade testimonials-marquee__fade--right" aria-hidden="true"></div>
     </div>
   </section>
-
-  <div class="section-divider"></div>
 
   <!-- ==========================================
        QUEM SOMOS
@@ -2870,6 +2867,8 @@
         });
         // Fixed header: kids copy for slides 1-2, master copy for slide 3.
         // Kids copy covers the kids slides, master copy covers the last slide.
+        // Fixed copy: kids text stays put across the kids slides and only
+        // swaps when the master image appears. Backgrounds alone animate.
         const isMaster = index === slides.length - 1;
         if (kidsContent) kidsContent.classList.toggle('active', !isMaster);
         if (masterContent) masterContent.classList.toggle('active', isMaster);
@@ -2935,6 +2934,22 @@
         else startSlider();
       });
 
+      // Replay slide 1 entrance on page open: park it off-screen, then
+      // re-activate after first paint so the transition effect plays on
+      // the first slide too (desktop: pushes in from the right,
+      // mobile: fades in). rAF waits if the tab opens in background.
+      if (slides.length && sliderEl) {
+        const firstSlide = slides[0];
+        const firstInner = firstSlide.querySelector('.hero__slide-inner');
+        firstSlide.classList.remove('active');
+        if (firstInner) firstInner.style.transition = 'none';
+        void sliderEl.offsetWidth;
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          if (firstInner) firstInner.style.transition = '';
+          firstSlide.classList.add('active');
+        }));
+      }
+
       startSlider();
 
       // Fire the first push transition right after the first slide paints,
@@ -2976,19 +2991,6 @@
           });
         }
         track.innerHTML = cardsHtml;
-
-        // Mobile/touch-only: tap-to-pause/resume toggle. Desktop
-        // (hover-capable) keeps CSS :hover pause untouched.
-        try {
-          if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
-            const row = document.getElementById('testimonials-row');
-            if (row) {
-              row.addEventListener('click', () => {
-                track.classList.toggle('is-paused');
-              });
-            }
-          }
-        } catch (e) { /* no-op: marquee keeps animating */ }
       }
 
       // ── FAQ accordion ──────────────────────────
