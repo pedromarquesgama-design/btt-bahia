@@ -1,0 +1,3086 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BTT Porto Seguro – Boxe, Jiu-Jitsu</title>
+  <meta name="description" content="Academia de artes marciais em Porto Seguro, Bahia. Jiu-Jitsu, Boxe e aulas infantis com o Mestre Eliandro Rodrigues.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="master-solo.jpg" media="(min-width: 768px)">
+  <link rel="preload" as="image" href="master-solo-mobile.jpg" media="(max-width: 767px)">
+  <link rel="preload" as="image" href="hero-kids-1.jpg">
+  <link rel="preload" as="image" href="hero-kids-2.jpg">
+  <link rel="preload" as="image" href="hero-kids-3.jpg" media="(min-width: 768px)">
+  <style>
+    /* =============================================
+       CSS CUSTOM PROPERTIES (Design Tokens)
+       ============================================= */
+    :root {
+      /* Colors — "Fábrica de Campeões" Dark Mode Palette */
+      /* Background Base: Deep Charcoal/Black for gritty fight factory */
+      --color-background: #0F0F12;
+      --color-background-alt: #18181B;
+
+      /* Surface/Card Backgrounds with crisp 1px borders */
+      --color-surface: #18181B;
+      --color-surface-2: #27272A;
+
+      /* Primary Accent: Vibrant Boxing Red (DC2626/E11D48 from gloves) */
+      --color-primary: #DC2626;
+      --color-primary-dark: #991B1B;
+      --color-secondary: #E11D48;
+
+      /* Secondary Accent: Championship Gold for victory elements */
+      --color-gold: #F59E0B;
+      --color-gold-light: #FBBF24;
+
+      /* Supporting Accents: BTT Green/Blue for subtle accents */
+      --color-accent-green: #16A34A;
+      --color-accent-blue: #1D4ED8;
+
+      /* Text Colors */
+      --color-foreground: #FAFAFA;
+      --color-foreground-muted: #A1A1AA;
+
+      /* Utility Colors */
+      --color-muted: #27272A;
+      --color-border: #27272A;
+      --color-accent: #E11D48;
+
+      /* Typography */
+      --font-display: 'Bebas Neue', 'Impact', sans-serif;
+      --font-body: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.125rem;
+      --text-xl: 1.25rem;
+      --text-2xl: 1.5rem;
+      --text-3xl: 1.875rem;
+      --text-4xl: 2.25rem;
+      --text-5xl: 3rem;
+      --text-6xl: 3.75rem;
+      --text-7xl: 4.5rem;
+
+      /* Spacing */
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
+
+      /* Layout */
+      --container-max: 1200px;
+      --container-padding: var(--space-4);
+      --nav-height: 64px;
+
+      /* Borders */
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+
+      /* Transitions */
+      --transition-fast: 150ms ease;
+      --transition-base: 250ms ease;
+      --transition-slow: 400ms ease;
+
+      /* Shadows */
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.5);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.6);
+    }
+
+    /* =============================================
+       RESET & BASE
+       ============================================= */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: var(--nav-height);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--color-foreground);
+      background-color: var(--color-background);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    img, video { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    ul, ol { list-style: none; }
+
+    /* =============================================
+       TYPOGRAPHY
+       ============================================= */
+    .font-display { font-family: var(--font-display); }
+    h1, h2, h3, h4, h5, h6 { line-height: 1.1; }
+
+    /* =============================================
+       LAYOUT UTILITIES
+       ============================================= */
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--container-padding);
+    }
+
+    .section {
+      padding: var(--space-16) 0;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: var(--text-5xl);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--color-foreground);
+      margin-bottom: var(--space-2);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .section-title span {
+      color: var(--color-primary);
+    }
+
+    .section-subtitle {
+      font-size: var(--text-lg);
+      color: var(--color-foreground-muted);
+      margin-bottom: var(--space-10);
+    }
+
+    /* =============================================
+       NAVIGATION
+       ============================================= */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      z-index: 1000;
+      background: rgba(15, 15, 18, 0.98);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+      transition: background var(--transition-base);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      line-height: 1;
+    }
+
+    .nav__logo-img {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+      /* SVG support */
+      max-width: 200px;
+    }
+
+    /* SVG logo styling */
+    .nav__logo-img svg {
+      height: 100%;
+      width: auto;
+    }
+
+    @media (min-width: 768px) {
+      .nav__logo-img {
+        height: 56px;
+      }
+    }
+
+    .nav__links {
+      display: none;
+      gap: var(--space-8);
+    }
+
+    .nav__link {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-foreground-muted);
+      transition: color var(--transition-fast);
+      position: relative;
+    }
+
+    .nav__link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--color-primary);
+      transition: width var(--transition-base);
+    }
+
+    .nav__link:hover,
+    .nav__link.active {
+      color: var(--color-foreground);
+    }
+
+    .nav__link:hover::after,
+    .nav__link.active::after {
+      width: 100%;
+    }
+
+    .nav__cta {
+      display: none;
+    }
+
+    /* Mobile menu button */
+    .nav__toggle {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: var(--space-2);
+      cursor: pointer;
+    }
+
+    .nav__toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--color-foreground);
+      transition: all var(--transition-base);
+    }
+
+    .nav__toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .nav__toggle.active span:nth-child(2) { opacity: 0; }
+    .nav__toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* Mobile menu */
+    .nav__mobile {
+      position: fixed;
+      top: var(--nav-height);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 15, 18, 0.98);
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-8);
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition-base);
+      z-index: 999;
+    }
+
+    .nav__mobile.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nav__mobile-link {
+      font-family: var(--font-display);
+      font-size: var(--text-4xl);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-foreground);
+      transition: color var(--transition-fast);
+      text-align: center;
+      padding: var(--space-2) var(--space-4);
+    }
+
+    .nav__mobile-link:hover { color: var(--color-primary); }
+
+    @media (min-width: 768px) {
+      .nav__links { display: flex; }
+      .nav__cta { display: block; }
+      .nav__toggle { display: none; }
+    }
+
+    /* =============================================
+       BUTTONS
+       ============================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-6);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-fast);
+      cursor: pointer;
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    .btn--primary {
+      background: var(--color-primary);
+      color: var(--color-foreground);
+      border: 2px solid var(--color-primary);
+    }
+
+    .btn--primary:hover {
+      background: var(--color-primary-dark);
+      border-color: var(--color-primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(220, 38, 38, 0.5), 0 0 24px rgba(234, 179, 8, 0.15);
+    }
+
+    .btn--outline {
+      background: transparent;
+      color: var(--color-foreground);
+      border: 2px solid var(--color-foreground);
+    }
+
+    .btn--outline:hover {
+      background: var(--color-foreground);
+      color: var(--color-background);
+      transform: translateY(-2px);
+    }
+
+    .btn--large {
+      padding: var(--space-4) var(--space-10);
+      font-size: var(--text-base);
+    }
+
+    /* =============================================
+       HERO SECTION
+       ============================================= */
+    .hero {
+      position: relative;
+      /* Height is dictated by the master image (slide 2), not the viewport,
+         so the slider ends exactly at the bottom of the master image. */
+      min-height: 0;
+      padding-top: var(--nav-height);
+      display: block;
+      overflow: hidden;
+    }
+
+    /* Faded bottom edge blending the slider into the next section */
+    .hero::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, var(--color-background));
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .hero__slider {
+      position: relative;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: auto;
+      z-index: 0;
+      /* Same box for every slide: aspect matches master-solo.jpg (2976x1430),
+         so slide 1 (Aulas infantis) ends at the exact same height as slide 2. */
+      aspect-ratio: 2976 / 1430;
+      /* Guarantees content still fits on narrow screens where the
+         aspect-derived height would be too short — image then crops via cover,
+         but both slides stay the same height. */
+      min-height: 560px;
+    }
+
+    .hero__slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      /* NOTE: no content-visibility toggling here on purpose — the incoming
+         slide must stay rendered so its inner transform/opacity transition
+         has a before-state to animate from. Toggling it makes slides pop in
+         instantly and kills the push/fade effect. */
+      contain: strict;
+      /* No transform/opacity transition on the outer slide — only on the
+         inner wrapper. This keeps the heavy grid layout (and its many
+         descendants) in a stable paint layer and isolates the GPU
+         animation to a single leaf, eliminating jank during transitions. */
+    }
+
+    .hero__slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 2;
+    }
+
+    /* Outgoing slide stays visible while it gets pushed out to the left */
+    .hero__slide.hero__slide--prev {
+      opacity: 1;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+
+    /* Inner wrapper that actually moves. Single node = fast GPU compositing.
+       Both slides animate together so the incoming hero pushes the old one
+       out while gradually fading in. */
+    .hero__slide-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      transform: translate3d(100%, 0, 0);
+      opacity: 0;
+      transition:
+        transform 650ms cubic-bezier(0.65, 0, 0.35, 1),
+        opacity 650ms ease;
+      will-change: transform, opacity;
+    }
+
+    .hero__slide.active .hero__slide-inner {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+
+    /* When a slide was active and is leaving, push its inner out to the left */
+    .hero__slide.hero__slide--prev .hero__slide-inner {
+      transform: translate3d(-100%, 0, 0);
+      opacity: 1;
+    }
+
+    .hero__slide-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero__slide-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(0,0,0,0.88) 0%,
+        rgba(0,0,0,0.7) 50%,
+        rgba(0,0,0,0.5) 100%
+      );
+      z-index: 2;
+    }
+
+    /* Hero slide background images — drop your files as
+       hero-kids-1.jpg and hero-kids-2.jpg next to index.html.
+       Slide 1 = single picture, slide 2 = both side by side. */
+    .hero__slide-bg--kids-single {
+      background-image: url('hero-kids-1.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #1a1a1a;
+    }
+
+    .hero__slide-bg--kids-split {
+      display: flex;
+      flex-direction: row;
+      background-color: #1a1a1a;
+      overflow: hidden;
+    }
+
+    /* Melting middle seam where the two kids photos meet (desktop: vertical) */
+    .hero__slide-bg--kids-split::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 60px;
+      transform: translateX(-50%);
+      background: linear-gradient(to right, transparent, rgba(15, 15, 18, 0.35) 30%, rgba(15, 15, 18, 0.35) 70%, transparent);
+      -webkit-backdrop-filter: blur(3px);
+      backdrop-filter: blur(3px);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 25%, black 75%, transparent);
+      mask-image: linear-gradient(to right, transparent, black 25%, black 75%, transparent);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero__kids-pic {
+      flex: 1 1 50%;
+      min-width: 0;
+      min-height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .hero__kids-pic--1 {
+      background-image: url('hero-kids-3.jpg');
+      /* Stretch to fill the half exactly — no black gaps */
+      background-size: 100% 100%;
+      background-position: center;
+      background-color: #0F0F12;
+    }
+    .hero__kids-pic--2 { background-image: url('hero-kids-2.jpg'); }
+
+    .hero__slide-bg--master {
+      background-image: url('master-solo.jpg');
+      /* Fill the shared slider box exactly — no letterboxing, so the
+         bottom of the slider IS the bottom of the master image. */
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      background-color: #1a1a1a; /* fallback while image loads */
+    }
+
+    /* Bottom faded edge on kids-1 and master-solo so each photo melts into the next section */
+    .hero__slide-bg--kids-single::after,
+    .hero__slide-bg--master::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 140px;
+      background: linear-gradient(to bottom, transparent, rgba(15, 15, 18, 0.85));
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Fixed content layer above the sliding backgrounds.
+       Kids copy stays put across bg 1+2; only swaps for the master. */
+    .hero__content-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .hero__content-layer .hero__content {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(14px);
+      transition: opacity 500ms ease, transform 500ms ease, visibility 0s linear 500ms;
+    }
+
+    .hero__content-layer .hero__content.active {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      transition: opacity 500ms ease, transform 500ms ease;
+    }
+
+    .hero__content-layer .hero__content a,
+    .hero__content-layer .hero__content .btn {
+      pointer-events: auto;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      /* Vertically centered via flex parent; only breathing room top/bottom. */
+      padding-top: var(--space-8);
+      padding-bottom: var(--space-8);
+    }
+
+    .hero__badge {
+      display: inline-block;
+      font-size: var(--text-sm);
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      border: 1px solid var(--color-primary);
+      padding: var(--space-2) var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+
+    .hero__badge--gold {
+      color: var(--color-gold);
+      border-color: var(--color-gold);
+      background: rgba(245, 158, 11, 0.08);
+    }
+
+    /* Master slide content sits a little higher now that the badge is gone */
+    .hero__content-layer .hero__content--master {
+      justify-content: center;
+      padding-bottom: calc(var(--space-8) + 32px + env(safe-area-inset-bottom, 0px));
+    }
+    .hero__content-layer .hero__content--master.active {
+      transform: translateY(-16px);
+    }
+
+    .hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 10vw, var(--text-7xl));
+      line-height: 0.95;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--color-foreground);
+      margin-bottom: var(--space-4);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      hyphens: none;
+    }
+
+    .hero__title span { color: var(--color-primary); }
+
+    .hero__subtitle {
+      font-size: var(--text-xl);
+      font-weight: 300;
+      color: var(--color-foreground-muted);
+      margin-bottom: var(--space-8);
+      max-width: 480px;
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+    }
+
+    .hero__arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #fff;
+      cursor: pointer;
+      z-index: 4;
+      transition: all var(--transition-fast);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    .hero__arrow:hover {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .hero__arrow:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    .hero__arrow--prev { left: var(--space-4); }
+    .hero__arrow--next { right: var(--space-4); }
+
+    .hero__arrow svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    /* =============================================
+       TESTIMONIALS MARQUEE (vanilla port of
+       components/ui/testimonials-with-marquee +
+       components/ui/testimonial-card)
+       — marquee only, no title/description header —
+       ============================================= */
+    .testimonials-marquee {
+      background: transparent;
+      color: var(--color-foreground);
+      padding: 0 0 1.5rem;
+      margin-top: -2.5rem;
+      position: relative;
+      z-index: 3;
+    }
+
+    .testimonials-marquee__viewport {
+      position: relative;
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .testimonials-marquee__row {
+      --gap: 1rem;
+      --duration: 90s;
+      display: flex;
+      overflow: hidden;
+      padding: 0.5rem;
+      gap: var(--gap);
+      flex-direction: row;
+      width: 100%;
+    }
+
+    .testimonials-marquee__track {
+      display: flex;
+      flex-shrink: 0;
+      justify-content: space-around;
+      gap: var(--gap);
+      flex-direction: row;
+      width: max-content;
+      animation: marquee var(--duration) linear infinite;
+    }
+
+    .testimonials-marquee__row:hover .testimonials-marquee__track {
+      animation-play-state: paused;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(calc(-50% - var(--gap) / 2)); }
+    }
+
+    .testimonials-marquee__fade {
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 33.333%;
+      display: none;
+    }
+
+    .testimonials-marquee__fade--left {
+      left: 0;
+      background: linear-gradient(to right, var(--color-background), transparent);
+    }
+
+    .testimonials-marquee__fade--right {
+      right: 0;
+      background: linear-gradient(to left, var(--color-background), transparent);
+    }
+
+    @media (min-width: 640px) {
+      .testimonials-marquee {
+        padding: 0 0 2rem;
+        margin-top: -3.5rem;
+      }
+      .testimonials-marquee__fade {
+        display: block;
+      }
+    }
+
+    .testimonial-card {
+      display: flex;
+      flex-direction: column;
+      border-radius: 8px;
+      border: 1px solid var(--color-border);
+      border-top: 1px solid var(--color-border);
+      background: linear-gradient(to bottom, rgba(39,39,42,0.5), rgba(39,39,42,0.1));
+      padding: 1rem;
+      text-align: start;
+      max-width: 320px;
+      width: 320px;
+      flex-shrink: 0;
+      transition: border-color var(--transition-base);
+    }
+
+    @media (min-width: 640px) {
+      .testimonial-card { padding: 1.5rem; }
+    }
+
+    .testimonial-card:hover {
+      border-color: var(--color-primary);
+    }
+
+    .testimonial-card__name {
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1;
+      color: var(--color-foreground);
+    }
+
+    .testimonial-card__stars {
+      margin-top: 0.25rem;
+      display: flex;
+      gap: 2px;
+    }
+
+    .testimonial-card__stars svg {
+      width: 16px;
+      height: 16px;
+      fill: #FACC15;
+      color: #FACC15;
+    }
+
+    .testimonial-card__text {
+      margin-top: 0.75rem;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: var(--color-foreground-muted);
+    }
+
+    @media (min-width: 640px) {
+      .testimonial-card__text { font-size: 1rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .testimonials-marquee__track { animation: none; }
+    }
+
+    /* =============================================
+       RESPONSIVE — GLOBAL
+       ============================================= */
+
+    /* — Ultra small phones (< 380px) — */
+    @media (max-width: 379px) {
+      :root {
+        --container-padding: var(--space-3);
+      }
+      .hero__title { font-size: clamp(2.25rem, 14vw, 3rem); }
+      .section-title { font-size: var(--text-3xl); }
+      .btn { padding: var(--space-2) var(--space-4); font-size: var(--text-xs); }
+      .btn--large { padding: var(--space-3) var(--space-6); font-size: var(--text-sm); }
+      .contatos__form { padding: var(--space-5); }
+      .modalidade-card__content { padding: var(--space-4); }
+    }
+
+    /* — Mobile portrait (< 480px) — */
+    @media (max-width: 479px) {
+      .nav { height: 56px; }
+      .nav__logo-img { height: 36px; }
+      :root { --nav-height: 56px; }
+      .hero__slider { min-height: calc(100svh - var(--nav-height)); }
+      /* Stack the 2 kids pictures top/bottom on narrow screens */
+      .hero__slide-bg--kids-split { flex-direction: column; }
+      /* Keep the master (right side of photo) visible when cover crops on narrow screens */
+      .hero__slide-bg--master { background-position: 72% top; }
+      .hero__title { font-size: clamp(2.75rem, 13vw, 4rem); }
+      .hero__subtitle { font-size: var(--text-base); max-width: 100%; }
+      .hero__content { padding-top: var(--space-6); padding-bottom: var(--space-6); }
+      .hero__actions { flex-direction: column; align-items: stretch; }
+      .hero__actions .btn { width: 100%; }
+      .hero__arrow { width: 40px; height: 40px; }
+      .hero__arrow--prev { left: var(--space-2); }
+      .hero__arrow--next { right: var(--space-2); }
+      .section { padding: var(--space-12) 0; }
+      .section-title { font-size: var(--text-4xl); }
+      .section-subtitle { font-size: var(--text-base); }
+      .quem-somos__text p { font-size: var(--text-base); }
+      .quem-somos__text p:first-of-type::first-letter { font-size: var(--text-4xl); }
+      .horarios__table th, .horarios__table td { padding: var(--space-2); font-size: var(--text-xs); }
+      .faq__question { font-size: var(--text-base); padding: var(--space-4) 0; }
+      .contatos__form { padding: var(--space-6); }
+      .contatos__item-icon { width: 40px; height: 40px; }
+      .contatos__item-value { font-size: var(--text-sm); }
+      .contatos__whatsapp-btn { width: 100%; justify-content: center; padding: var(--space-3) var(--space-4); }
+      .footer__inner { gap: var(--space-5); }
+      .footer__logo-img { height: 32px; }
+    }
+
+    /* — Mobile landscape / large phones (480–767px) — */
+    @media (min-width: 480px) and (max-width: 767px) {
+      .hero__slider { min-height: 520px; }
+      .hero__slide-bg--master { background-position: 72% top; }
+      .hero__title { font-size: clamp(3rem, 12vw, 4.5rem); }
+      .hero__subtitle { font-size: var(--text-lg); }
+      .section { padding: var(--space-14) 0; }
+    }
+
+    /* — Tablet portrait (768–1023px) — */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .hero__slider { min-height: 480px; }
+      .hero__title { font-size: clamp(3.5rem, 8vw, 5rem); }
+      .hero__subtitle { font-size: var(--text-lg); }
+      .modalidades__grid { grid-template-columns: repeat(2, 1fr); }
+      .quem-somos__inner { grid-template-columns: 1fr; gap: var(--space-8); }
+      .quem-somos__visual { max-width: 600px; margin: 0 auto; }
+      .contatos__grid { grid-template-columns: 1fr; }
+      .contatos__map { height: 320px; }
+      .footer__inner { flex-direction: row; flex-wrap: wrap; justify-content: space-around; text-align: left; }
+    }
+
+    /* — Small laptop (1024–1279px) — */
+    @media (min-width: 1024px) and (max-width: 1279px) {
+      .hero__title { font-size: clamp(4rem, 7vw, 5.5rem); }
+      .modalidades__grid { grid-template-columns: repeat(3, 1fr); }
+      .quem-somos__inner { grid-template-columns: 1fr 1fr; gap: var(--space-10); }
+      .contatos__grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* — Desktop (1280–1599px) — */
+    @media (min-width: 1280px) {
+      .hero__title { font-size: clamp(4.5rem, 6vw, 6.5rem); }
+      .container { max-width: 1280px; }
+    }
+
+    /* — Ultra-wide (≥ 1600px) — */
+    @media (min-width: 1600px) {
+      :root {
+        --container-max: 1400px;
+        --text-7xl: 5.5rem;
+      }
+      .container { max-width: var(--container-max); }
+      .hero__title { font-size: var(--text-7xl); }
+      .section-title { font-size: var(--text-6xl); }
+    }
+
+    /* — Landscape orientation safety (short heights) — */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .hero__slider { min-height: 420px; }
+      .hero__title { font-size: clamp(2.5rem, 8vh, 4rem); }
+      .hero__subtitle { font-size: var(--text-base); margin-bottom: var(--space-4); }
+      .hero__actions .btn { min-height: 40px; padding: var(--space-2) var(--space-5); }
+      .hero__arrow { width: 40px; height: 40px; }
+    }
+
+    /* — Print safety — */
+    @media print {
+      .hero { min-height: auto; }
+      .hero__arrow { display: none; }
+      .nav, .footer, .contatos__whatsapp-btn { display: none; }
+    }
+
+    /* =============================================
+       MODALIDADES (Class Cards)
+       ============================================= */
+    #modalidades {
+      background: var(--color-background-alt);
+      padding-top: 0;
+    }
+
+    .modalidades__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+
+    .modalidade-card {
+      position: relative;
+      background: transparent;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid rgba(245, 158, 11, 0.55);
+      transition: all var(--transition-base);
+    }
+
+    .modalidade-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-gold);
+      box-shadow: 0 12px 32px rgba(245, 158, 11, 0.18);
+    }
+
+    .modalidade-card__image {
+      height: 260px;
+      background: var(--color-surface-2);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Gradient-based visual for each discipline */
+    .modalidade-card__image--jj { background: linear-gradient(135deg, #1a0a0a 0%, #2d1010 100%); }
+    .modalidade-card__image--bjj { background: linear-gradient(135deg, #1a0808 0%, #2d0f0f 100%); }
+    .modalidade-card__image--boxe { background: linear-gradient(135deg, #0f0a0a 0%, #1a0505 100%); }
+    .modalidade-card__image--mma { background: linear-gradient(135deg, #0a0a0a 0%, #150808 100%); }
+
+    .modalidade-card__icon {
+      width: 80px;
+      height: 80px;
+      opacity: 0.6;
+    }
+
+    .modalidade-card__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    /* Jiu-Jitsu photos: favor the top so faces show in the short banner */
+    .modalidade-card__image--jj .modalidade-card__img,
+    .modalidade-card__image--bjj .modalidade-card__img {
+      object-position: center top;
+    }
+
+    /* Boxe is a logo: show it completely on a matching background */
+    .modalidade-card__image--boxe {
+      background: #fff;
+    }
+
+    .modalidade-card__image--boxe .modalidade-card__img {
+      object-fit: contain;
+      background: #fff;
+      /* Source is portrait with the circular emblem in the middle ~56%
+         of the height: zoom just enough to fill the banner with the
+         whole badge, no cropped text */
+      transform: scale(1.75);
+      transform-origin: center;
+    }
+
+    .modalidade-card:hover .modalidade-card__image--boxe .modalidade-card__img {
+      transform: scale(1.85);
+    }
+
+    .modalidade-card__content {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: var(--space-6) var(--space-4) var(--space-4);
+      background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    }
+
+    .modalidade-card__title {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--color-foreground);
+      margin-bottom: var(--space-2);
+    }
+
+    .modalidade-card__subtitle {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0;
+    }
+
+    @media (min-width: 640px) {
+      .modalidades__grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (min-width: 1024px) {
+      .modalidades__grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* =============================================
+       TRADIÇÃO E METODOLOGIA — card grid for masters
+       ============================================= */
+    .tradicao-metodo {
+      background: var(--color-background-alt);
+      position: relative;
+      overflow: hidden;
+      padding-bottom: var(--space-2);
+    }
+
+    .tradicao-metodo::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, transparent 0%, var(--color-primary) 50%, var(--color-gold) 100%);
+    }
+
+    .tradicao-metodo__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .tradicao-metodo-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all var(--transition-base);
+      position: relative;
+    }
+
+    .tradicao-metodo-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-primary);
+      box-shadow: 0 16px 40px rgba(220, 38, 38, 0.18);
+    }
+
+    .tradicao-metodo-card--featured {
+      border-color: var(--color-gold);
+      box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.25) inset;
+    }
+
+    .tradicao-metodo-card--featured:hover {
+      border-color: var(--color-gold-light);
+      box-shadow: 0 16px 40px rgba(245, 158, 11, 0.25);
+    }
+
+    /* Founder cards (Murilo + Popó): red border */
+    .tradicao-metodo-card:not(.tradicao-metodo-card--featured) {
+      border-color: rgba(220, 38, 38, 0.6);
+    }
+    .tradicao-metodo-card:not(.tradicao-metodo-card--featured):hover {
+      border-color: var(--color-primary);
+    }
+
+    .tradicao-metodo-card__image {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: var(--color-surface-2);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tradicao-metodo-card__image--duo {
+      background: linear-gradient(135deg, #1a0a0a 0%, #2d1010 100%);
+    }
+
+    .tradicao-metodo-card__image--solo {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    }
+
+    .tradicao-metodo-card__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform var(--transition-slow);
+    }
+
+    .tradicao-metodo-card:hover .tradicao-metodo-card__img {
+      transform: scale(1.05);
+    }
+
+    /* Murilo + Popó: shrink to fill the card exactly — no gaps */
+    .tradicao-metodo-card__image--murilo .tradicao-metodo-card__img,
+    .tradicao-metodo-card__image--popo .tradicao-metodo-card__img {
+      object-fit: fill;
+      object-position: center;
+    }
+
+    .tradicao-metodo-card__pin {
+      position: absolute;
+      top: var(--space-4);
+      left: var(--space-4);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-light) 100%);
+      color: #1a1a1a;
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-display);
+      font-size: var(--text-sm);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+      z-index: 2;
+    }
+
+    .tradicao-metodo-card__content {
+      padding: var(--space-6);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .tradicao-metodo-card__eyebrow {
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .tradicao-metodo-card__eyebrow--gold {
+      color: var(--color-gold);
+    }
+
+    .tradicao-metodo-card__name {
+      font-family: var(--font-display);
+      font-size: var(--text-3xl);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--color-foreground);
+      line-height: 1.1;
+    }
+
+    .tradicao-metodo-card__desc {
+      font-size: var(--text-base);
+      color: var(--color-foreground-muted);
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .tradicao-metodo-card__note {
+      font-size: var(--text-sm);
+      color: var(--color-foreground);
+      line-height: 1.6;
+      background: var(--color-surface-2);
+      padding: var(--space-3) var(--space-4);
+      border-left: 3px solid var(--color-primary);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+
+    .tradicao-metodo-card--featured .tradicao-metodo-card__note {
+      border-left-color: var(--color-gold);
+      background: rgba(245, 158, 11, 0.08);
+    }
+
+    .tradicao-metodo-card__badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-top: var(--space-2);
+    }
+
+    .tradicao-metodo-badge {
+      display: inline-block;
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-foreground);
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      padding: var(--space-1) var(--space-3);
+      border-radius: 999px;
+      transition: all var(--transition-fast);
+    }
+
+    .tradicao-metodo-card:hover .tradicao-metodo-badge {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    .tradicao-metodo-badge--gold {
+      color: var(--color-gold);
+      border-color: rgba(245, 158, 11, 0.3);
+      background: rgba(245, 158, 11, 0.08);
+    }
+
+    /* Popó card badges: red instead of gold */
+    .tradicao-metodo__grid > article:nth-child(2) .tradicao-metodo-badge--gold {
+      color: var(--color-primary);
+      border-color: rgba(220, 38, 38, 0.35);
+      background: rgba(220, 38, 38, 0.08);
+    }
+    .tradicao-metodo__grid > article:nth-child(2):hover .tradicao-metodo-badge--gold {
+      border-color: var(--color-primary);
+      color: var(--color-secondary);
+      background: rgba(220, 38, 38, 0.15);
+    }
+
+    /* Murilo card badges: red as well */
+    .tradicao-metodo__grid > article:nth-child(1) .tradicao-metodo-badge {
+      color: var(--color-primary);
+      border-color: rgba(220, 38, 38, 0.35);
+      background: rgba(220, 38, 38, 0.08);
+    }
+    .tradicao-metodo__grid > article:nth-child(1):hover .tradicao-metodo-badge {
+      border-color: var(--color-primary);
+      color: var(--color-secondary);
+      background: rgba(220, 38, 38, 0.15);
+    }
+
+    .tradicao-metodo-card--featured:hover .tradicao-metodo-badge--gold {
+      border-color: var(--color-gold);
+      color: var(--color-gold-light);
+      background: rgba(245, 158, 11, 0.15);
+    }
+
+    /* Desktop: side-by-side */
+    @media (min-width: 768px) {
+      .tradicao-metodo__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-10);
+        align-items: stretch;
+      }
+      .tradicao-metodo-card__image {
+        aspect-ratio: 1/1;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .tradicao-metodo__grid {
+        gap: var(--space-12);
+      }
+    }
+
+    /* =============================================
+       QUEM SOMOS
+       ============================================= */
+    #quem-somos {
+      background: var(--color-background);
+      position: relative;
+      overflow: hidden;
+      padding-top: var(--space-8);
+    }
+
+    .quem-somos__inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-12);
+      align-items: center;
+    }
+
+    .quem-somos__text p {
+      font-size: var(--text-lg);
+      color: var(--color-foreground-muted);
+      margin-bottom: var(--space-4);
+      line-height: 1.8;
+    }
+
+    .quem-somos__text p:first-of-type::first-letter {
+      font-family: var(--font-display);
+      font-size: var(--text-5xl);
+      color: var(--color-primary);
+      float: left;
+      margin-right: var(--space-3);
+      line-height: 1;
+    }
+
+    .quem-somos__highlight {
+      background: var(--color-surface);
+      border-left: 4px solid var(--color-primary);
+      padding: var(--space-6);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      margin: var(--space-6) 0;
+    }
+
+    .quem-somos__highlight p {
+      font-size: var(--text-base) !important;
+      font-style: italic;
+      color: var(--color-foreground) !important;
+    }
+
+    .quem-somos__master {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      margin-top: var(--space-6);
+    }
+
+    .quem-somos__master-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      color: var(--color-foreground);
+      flex-shrink: 0;
+    }
+
+    .quem-somos__master-info {}
+    .quem-somos__master-name { font-weight: 700; font-size: var(--text-lg); }
+    .quem-somos__master-title { font-size: var(--text-sm); color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.1em; }
+
+    .quem-somos__visual {
+      position: relative;
+    }
+
+    .quem-somos__image {
+      width: 100%;
+      aspect-ratio: 4/3;
+      min-height: 240px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      display: block;
+    }
+
+    .quem-somos__image-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      min-height: 240px;
+      background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-surface-2) 100%);
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-3);
+      border: 1px solid var(--color-border);
+    }
+
+    .quem-somos__image-placeholder span {
+      font-size: var(--text-sm);
+      color: var(--color-foreground-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .quem-somos__image-placeholder svg {
+      opacity: 0.3;
+    }
+
+    @media (min-width: 768px) {
+      .quem-somos__inner { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* =============================================
+       HORÁRIOS
+       ============================================= */
+    #horarios {
+      background: var(--color-background-alt);
+      padding-top: var(--space-2);
+      padding-bottom: var(--space-4);
+    }
+
+    .horarios__table-wrapper {
+      overflow-x: auto;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+    }
+
+    .horarios__table {
+      width: 100%;
+      min-width: 600px;
+      border-collapse: collapse;
+      background: var(--color-surface);
+    }
+
+    .horarios__table th,
+    .horarios__table td {
+      padding: var(--space-4);
+      text-align: center;
+      font-size: var(--text-sm);
+      border: 1px solid var(--color-border);
+    }
+
+    .horarios__table th {
+      background: var(--color-surface-2);
+      font-family: var(--font-display);
+      font-size: var(--text-base);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-foreground);
+    }
+
+    .horarios__table th:first-child {
+      background: var(--color-primary);
+      color: var(--color-foreground);
+    }
+
+    .horarios__table td:first-child {
+      background: var(--color-surface-2);
+      font-weight: 700;
+      color: var(--color-primary);
+      font-family: var(--font-display);
+      letter-spacing: 0.05em;
+    }
+
+    .horarios__table td {
+      color: var(--color-foreground-muted);
+      vertical-align: top;
+    }
+
+    .horarios__class {
+      margin-bottom: var(--space-2);
+    }
+
+    .horarios__class-name {
+      font-weight: 600;
+      color: var(--color-foreground);
+      display: block;
+    }
+
+    .horarios__class-time {
+      font-size: var(--text-xs);
+      color: var(--color-foreground-muted);
+    }
+
+    .horarios__placeholder {
+      color: var(--color-foreground-muted);
+      font-style: italic;
+    }
+
+    .horarios__note {
+      margin-top: var(--space-4);
+      font-size: var(--text-sm);
+      color: var(--color-foreground-muted);
+      text-align: center;
+    }
+
+    .horarios__note span {
+      color: var(--color-gold);
+    }
+
+    .horarios__group {
+      margin-bottom: var(--space-10);
+    }
+
+    .horarios__group:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .horarios__group-title {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-foreground);
+      margin-bottom: var(--space-4);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .horarios__group-title::before {
+      content: '';
+      width: 4px;
+      align-self: stretch;
+      background: var(--color-primary);
+      border-radius: 2px;
+    }
+
+    .horarios__boxe-note {
+      margin-top: var(--space-4);
+      font-size: var(--text-sm);
+      color: var(--color-foreground-muted);
+      background: var(--color-surface);
+      border-left: 3px solid var(--color-gold);
+      padding: var(--space-3) var(--space-4);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+
+    .horarios__boxe-note strong {
+      color: var(--color-foreground);
+    }
+
+    /* =============================================
+       FAQ (Accordion)
+       ============================================= */
+    #faq {
+      background: var(--color-background);
+      padding-top: 0;
+    }
+
+    .faq__list {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq__item {
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .faq__question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-5) 0;
+      font-size: var(--text-lg);
+      font-weight: 600;
+      color: var(--color-foreground);
+      text-align: left;
+      cursor: pointer;
+      background: none;
+      border: none;
+      gap: var(--space-4);
+      transition: color var(--transition-fast);
+    }
+
+    .faq__question:hover { color: var(--color-primary); }
+
+    .faq__icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      position: relative;
+      transition: transform var(--transition-base);
+    }
+
+    .faq__icon::before,
+    .faq__icon::after {
+      content: '';
+      position: absolute;
+      background: currentColor;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .faq__icon::before { width: 14px; height: 2px; }
+    .faq__icon::after { width: 2px; height: 14px; }
+
+    .faq__item.active .faq__icon { transform: rotate(45deg); }
+
+    .faq__answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--transition-slow);
+    }
+
+    .faq__item.active .faq__answer { max-height: 400px; }
+
+    .faq__answer-inner {
+      padding-bottom: var(--space-5);
+      font-size: var(--text-base);
+      color: var(--color-foreground-muted);
+      line-height: 1.8;
+    }
+
+    .faq__answer-inner .todo {
+      display: inline-block;
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--color-gold);
+      padding: 2px var(--space-2);
+      border-radius: var(--radius-sm);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* =============================================
+       CONTATOS
+       ============================================= */
+    #contatos {
+      background: var(--color-background-alt);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #contatos::before {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 50%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(220, 38, 38, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .contatos__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-12);
+    }
+
+    .contatos__info {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    .contatos__item {
+      display: flex;
+      gap: var(--space-4);
+      align-items: flex-start;
+    }
+
+    .contatos__item-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contatos__item-icon svg {
+      width: 20px;
+      height: 20px;
+      color: var(--color-primary);
+    }
+
+    .contatos__item-label {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-foreground-muted);
+      margin-bottom: var(--space-1);
+    }
+
+    .contatos__item-value {
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--color-foreground);
+    }
+
+    .contatos__item-value a {
+      color: var(--color-primary);
+      transition: color var(--transition-fast);
+    }
+
+    .contatos__item-value a:hover { color: var(--color-secondary); }
+
+    .contatos__whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+      background: #25D366;
+      color: white;
+      padding: var(--space-4) var(--space-6);
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: var(--text-base);
+      letter-spacing: 0.05em;
+      transition: all var(--transition-fast);
+      align-self: flex-start;
+    }
+
+    .contatos__whatsapp-btn:hover {
+      background: #1DA851;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(37, 211, 102, 0.3);
+    }
+
+    .contatos__whatsapp-btn .todo {
+      background: rgba(255,255,255,0.25);
+      padding: 2px var(--space-2);
+      border-radius: var(--radius-sm);
+      font-size: var(--text-xs);
+    }
+
+    .contatos__social {
+      display: flex;
+      gap: var(--space-3);
+      align-items: center;
+      margin-top: var(--space-2);
+    }
+
+    .contatos__social-link {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      color: var(--color-foreground-muted);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      transition: color var(--transition-fast);
+    }
+
+    .contatos__social-link:hover { color: var(--color-primary); }
+
+    .contatos__map {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      height: 300px;
+      min-height: 220px;
+    }
+
+    .contatos__map iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      filter: grayscale(0.8) contrast(1.1);
+    }
+
+    /* Contact Form */
+    .contatos__form {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8);
+    }
+
+    .form-group {
+      margin-bottom: var(--space-5);
+    }
+
+    .form-label {
+      display: block;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-foreground);
+      margin-bottom: var(--space-2);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-3) var(--space-4);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-foreground);
+      transition: border-color var(--transition-fast);
+      min-height: 44px;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.25);
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: var(--color-foreground-muted);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    @media (min-width: 768px) {
+      .contatos__grid { grid-template-columns: 1fr 1fr; }
+      .contatos__map { height: 100%; min-height: 400px; }
+    }
+
+    /* =============================================
+       FOOTER
+       ============================================= */
+    .footer {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      padding: var(--space-12) 0 var(--space-6);
+    }
+
+    .footer__inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+      align-items: center;
+      text-align: center;
+    }
+
+    .footer__logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .footer__logo-img {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .footer__logo-img svg {
+      height: 100%;
+      width: auto;
+    }
+
+    @media (min-width: 768px) {
+      .footer__logo-img {
+        height: 48px;
+      }
+    }
+
+    .footer__info {
+      font-size: var(--text-sm);
+      color: var(--color-foreground-muted);
+      line-height: 1.8;
+    }
+
+    .footer__info a {
+      color: var(--color-primary);
+      transition: color var(--transition-fast);
+    }
+
+    .footer__info a:hover { color: var(--color-secondary); }
+
+    .footer__divider {
+      width: 60px;
+      height: 2px;
+      background: var(--color-border);
+    }
+
+    .footer__copy {
+      font-size: var(--text-sm);
+      color: var(--color-foreground-muted);
+    }
+
+    .footer__copy span { color: var(--color-primary); }
+
+    @media (min-width: 768px) {
+      .footer__inner { flex-direction: row; justify-content: space-between; text-align: left; }
+    }
+
+    /* =============================================
+       SECTION DIVIDER
+       ============================================= */
+    .section-divider {
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-gold) 50%, transparent 100%);
+    }
+
+    /* Horários → FAQ divider: soft tonal fade, all screen sizes */
+    .section-divider--mobile-only {
+      display: block;
+      height: 32px;
+      background: linear-gradient(to bottom, var(--color-background-alt), var(--color-background));
+      /* Overlap neighbors 1px so no hairline renders at either edge */
+      margin-top: -1px;
+      margin-bottom: -1px;
+    }
+
+    /* =============================================
+       TODO BADGE
+       ============================================= */
+    .todo {
+      display: inline-block;
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--color-gold);
+      padding: 2px var(--space-2);
+      border-radius: var(--radius-sm);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* =============================================
+       MOBILE-ONLY RESPONSIVENESS FIX (max-width: 767px)
+       Strict scope: overrides below apply ONLY to phones.
+       No base/desktop rules edited above — desktop rendering
+       stays pixel-identical. Standard media query (no UA
+       sniffing) so Chrome/Android + Safari/iOS behave the same.
+       ============================================= */
+    @media (max-width: 767px) {
+      /* Shrink hero to fit: cap the full-screen min-height so the slider hugs the photos/content */
+      .hero__slider {
+        min-height: min(520px, calc(100svh - var(--nav-height)));
+      }
+      /* — 1) HERO SLIDER: full photos, nothing cut off — */
+      .hero__slide-bg--kids-single {
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-color: #0F0F12;
+      }
+      .hero__slide-bg--master {
+        background-image: url('master-solo-mobile.jpg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-color: #0F0F12;
+      }
+      .hero__slide-bg--kids-split {
+        flex-direction: column;
+        background-color: #0F0F12;
+      }
+      /* No seam band on mobile — the melt comes from the overlapping photos below */
+      .hero__slide-bg--kids-split::after {
+        display: none;
+      }
+      /* Stretched halves, no side/middle fades — bottom fade only */
+      .hero__kids-pic {
+        flex: 1 1 50%;
+        min-width: 0;
+        min-height: 0;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-color: #0F0F12;
+      }
+      /* Mobile: stronger bottom fade so it reads over the dark overlay */
+      .hero__slide-bg--kids-single::after,
+      .hero__slide-bg--master::after {
+        height: 180px;
+        background: linear-gradient(to bottom, transparent, #0F0F12);
+        z-index: 2;
+      }
+      /* Mobile: feather each photo's own bottom edge (contain leaves the
+         image ending well above the container, so the container-bottom
+         fade alone never touches the photo). Stops track 100vw via each
+         photo's aspect ratio: kids-1 = 1302/816, master-mobile = 2976/1430. */
+      .hero__slide-bg--kids-single {
+        -webkit-mask-image: linear-gradient(to bottom, black calc(100vw / 1.5956 - 70px), transparent calc(100vw / 1.5956));
+        mask-image: linear-gradient(to bottom, black calc(100vw / 1.5956 - 70px), transparent calc(100vw / 1.5956));
+      }
+      .hero__slide-bg--master {
+        -webkit-mask-image: linear-gradient(to bottom, black calc(100vw / 2.0818 - 70px), transparent calc(100vw / 2.0818));
+        mask-image: linear-gradient(to bottom, black calc(100vw / 2.0818 - 70px), transparent calc(100vw / 2.0818));
+      }
+      /* hero-kids-3 doesn't appear on mobile — slide 2 shows kids-2 only */
+      .hero__kids-pic--1 {
+        display: none;
+      }
+      .hero__kids-pic--2 {
+        flex: 1 1 100%;
+        order: 1;
+        -webkit-mask-image: none;
+        mask-image: none;
+        background-size: cover;
+        background-position: center top;
+      }
+
+      /* — 1b) HERO TRANSITION mobile: single crossfade, no overlap — */
+      .hero__slide-inner {
+        transform: none;
+        transition: opacity 500ms ease;
+      }
+      .hero__slide.active .hero__slide-inner {
+        transform: none;
+        opacity: 1;
+      }
+      .hero__slide.hero__slide--prev {
+        opacity: 0;
+      }
+      .hero__slide.hero__slide--prev .hero__slide-inner {
+        transform: none;
+        opacity: 0;
+      }
+
+      /* — 2) HERO CTA: fully visible + tappable, safe-area aware — */
+      .hero__content {
+        padding-bottom: calc(var(--space-6) + env(safe-area-inset-bottom, 0px));
+        padding-left: calc(var(--container-padding) + env(safe-area-inset-left, 0px));
+        padding-right: calc(var(--container-padding) + env(safe-area-inset-right, 0px));
+        min-width: 0;
+        max-width: 100%;
+        overflow-x: hidden;
+        box-sizing: border-box;
+      }
+      .hero__actions {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        position: relative;
+        z-index: 5;
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+        flex-direction: column;
+        align-items: stretch;
+        overflow-x: hidden;
+        box-sizing: border-box;
+      }
+      .hero__actions .btn {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        min-height: 48px;
+        white-space: normal;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        text-align: center;
+        box-sizing: border-box;
+        flex-shrink: 1;
+        padding-left: var(--space-4);
+        padding-right: var(--space-4);
+        font-size: var(--text-sm);
+      }
+      /* Belt-and-suspenders: never let hero children force horizontal scroll */
+      .hero,
+      .hero__slider,
+      .hero__content-layer {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+      /* No arrows on mobile — swipe with fingers instead */
+      .hero__arrow {
+        display: none;
+      }
+      /* Mobile menu: shrink contents to fit + fill the viewport */
+      .nav__mobile {
+        gap: var(--space-4);
+        padding: var(--space-6) var(--space-4);
+        overflow-y: auto;
+      }
+      .nav__mobile-link {
+        font-size: var(--text-2xl);
+      }
+      /* Master card names on a single line (mobile): Murilo, Popó, Eliandro */
+      .tradicao-metodo-card__name {
+        white-space: nowrap;
+        font-size: clamp(1.15rem, 5.6vw, var(--text-3xl));
+      }
+      .tradicao-metodo-card__name br {
+        display: none;
+      }
+
+      /* — 3) TESTIMONIALS MARQUEE: unstick hover-pause, keep looping — */
+      .testimonials-marquee__row {
+        --duration: 90s;
+        flex-wrap: nowrap;
+      }
+      .testimonials-marquee__track {
+        flex-shrink: 0;
+        width: max-content;
+        will-change: transform;
+        -webkit-animation: marquee var(--duration) linear infinite;
+        animation: marquee var(--duration) linear infinite;
+      }
+      /* Touch taps trigger :hover and get "stuck paused" — force running on mobile */
+      .testimonials-marquee__row:hover .testimonials-marquee__track {
+        -webkit-animation-play-state: running;
+        animation-play-state: running;
+      }
+      .testimonial-card {
+        flex-shrink: 0;
+      }
+      /* Re-declare keyframes inside mobile query so they are
+         guaranteed present in the mobile cascade + Safari prefix */
+      @-webkit-keyframes marquee {
+        from { -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
+        to { -webkit-transform: translate3d(calc(-50% - var(--gap) / 2), 0, 0); transform: translate3d(calc(-50% - var(--gap) / 2), 0, 0); }
+      }
+      @keyframes marquee {
+        from { transform: translate3d(0, 0, 0); }
+        to { transform: translate3d(calc(-50% - var(--gap) / 2), 0, 0); }
+      }
+    }
+
+    /* =============================================
+       VISUALLY HIDDEN (a11y)
+       ============================================= */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       NAVIGATION
+       ========================================== -->
+  <nav class="nav" role="navigation" aria-label="Menu principal">
+    <div class="container nav__inner">
+      <a href="#home" class="nav__logo" aria-label="Brazilian Top Team Porto Seguro – Início">
+        <img src="btt-logo.png" alt="Brazilian Top Team Porto Seguro" class="nav__logo-img">
+      </a>
+
+      <ul class="nav__links" role="list">
+        <li><a href="#home" class="nav__link active">Home</a></li>
+        <li><a href="#quem-somos" class="nav__link">Quem Somos</a></li>
+        <li><a href="#tradicao-metodologia" class="nav__link">Tradição e Metodologia</a></li>
+        <li><a href="#modalidades" class="nav__link">Modalidades</a></li>
+        <li><a href="#horarios" class="nav__link">Horários</a></li>
+        <li><a href="#contatos" class="nav__link">Contatos</a></li>
+      </ul>
+
+      <a href="#contatos" class="btn btn--primary nav__cta">Junte-se a Nós</a>
+
+      <button class="nav__toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="nav__mobile" role="dialog" aria-label="Menu de navegação">
+    <a href="#home" class="nav__mobile-link">Home</a>
+    <a href="#quem-somos" class="nav__mobile-link">Quem Somos</a>
+    <a href="#tradicao-metodologia" class="nav__mobile-link">Tradição e Metodologia</a>
+    <a href="#modalidades" class="nav__mobile-link">Modalidades</a>
+    <a href="#horarios" class="nav__mobile-link">Horários</a>
+    <a href="#faq" class="nav__mobile-link">FAQ</a>
+    <a href="#contatos" class="nav__mobile-link">Contatos</a>
+    <a href="#contatos" class="btn btn--primary btn--large" style="margin-top: 1rem;">Junte-se a Nós</a>
+  </div>
+
+  <!-- ==========================================
+       HERO / HOME
+       ========================================== -->
+  <section id="home" class="hero" aria-label="Banner principal">
+    <div class="hero__slider" aria-live="polite">
+
+      <!-- BGs push/slide behind a fixed content layer (3 backgrounds) -->
+      <!-- Slide 1: Aulas Infantis, single picture -->
+      <div class="hero__slide active" role="group" aria-label="Slide 1 de 3">
+        <div class="hero__slide-inner">
+        <div class="hero__slide-bg hero__slide-bg--kids-single" role="img" aria-label="Aulas infantis de jiu-jitsu na BTT Porto Seguro"></div>
+        <div class="hero__slide-overlay"></div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Aulas Infantis, hero-kids-2 + hero-kids-3 side by side with divider -->
+      <div class="hero__slide" role="group" aria-label="Slide 2 de 3">
+        <div class="hero__slide-inner">
+        <div class="hero__slide-bg hero__slide-bg--kids-split" role="img" aria-label="Aulas infantis de jiu-jitsu na BTT Porto Seguro">
+          <div class="hero__kids-pic hero__kids-pic--1" aria-hidden="true"></div>
+          <div class="hero__kids-pic hero__kids-pic--2" aria-hidden="true"></div>
+        </div>
+        <div class="hero__slide-overlay"></div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Aprenda com os Melhores Mestres, single picture -->
+      <div class="hero__slide" role="group" aria-label="Slide 3 de 3">
+        <div class="hero__slide-inner">
+        <div class="hero__slide-bg hero__slide-bg--master" role="img" aria-label="Mestre Eliandro Rodrigues, fundador da BTT Porto Seguro"></div>
+        <div class="hero__slide-overlay"></div>
+        </div>
+      </div>
+
+      <!-- Fixed content layer: kids text for slides 1-2, master text for slide 3 -->
+      <div class="hero__content-layer">
+        <div class="container hero__content hero__content--kids active">
+          <h1 class="hero__title">Aulas<br><span>Infantis</span></h1>
+          <p class="hero__subtitle">Disciplina, saúde e diversão para os pequenos. Aulas designed para crianças a partir de 4 anos.</p>
+          <div class="hero__actions">
+            <a href="#contatos" class="btn btn--primary btn--large">Junte-se a Nós</a>
+            <a href="#modalidades" class="btn btn--outline btn--large">Conheça as Modalidades</a>
+          </div>
+        </div>
+        <div class="container hero__content hero__content--master">
+          <h1 class="hero__title">Aprenda com<br>os Melhores<br><span>Mestres</span></h1>
+          <p class="hero__subtitle">Supere seus limites, desenvolva sua técnica e seja parte de uma equipe vencedora.</p>
+          <div class="hero__actions">
+            <a href="#contatos" class="btn btn--primary btn--large">Junte-se a Nós</a>
+            <a href="#tradicao-metodologia" class="btn btn--outline btn--large">Tradição e Metodologia</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Slider Arrows -->
+    <button class="hero__arrow hero__arrow--prev" aria-label="Slide anterior">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <button class="hero__arrow hero__arrow--next" aria-label="Próximo slide">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+  </section>
+
+  <!-- ==========================================
+       TESTIMONIALS MARQUEE (right below hero)
+       ========================================== -->
+  <section class="testimonials-marquee" aria-label="Depoimentos de alunos">
+    <div class="testimonials-marquee__viewport">
+      <div class="testimonials-marquee__row" id="testimonials-row">
+        <div class="testimonials-marquee__track" id="testimonials-track"></div>
+      </div>
+      <div class="testimonials-marquee__fade testimonials-marquee__fade--left" aria-hidden="true"></div>
+      <div class="testimonials-marquee__fade testimonials-marquee__fade--right" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       QUEM SOMOS
+       ========================================== -->
+  <section id="quem-somos" class="section" aria-labelledby="quem-somos-title">
+    <div class="container">
+      <div class="quem-somos__inner">
+        <div class="quem-somos__text">
+          <h2 id="quem-somos-title" class="section-title">Quem <span>Somos</span></h2>
+          <p class="section-subtitle">Tradição, dedicação e paixão pelas artes marciais</p>
+
+          <p>A <strong>BTT Porto Seguro</strong> é uma academia de artes marciais localizada no coração de Porto Seguro, Bahia. Nascemos da vontade de levar o melhor do Jiu-Jitsu e do Boxe para toda a região, com uma abordagem que combina técnica de alto nível e um ambiente acolhedor e familiar.</p>
+
+          <p>Nosso trabalho vai além do tatame. Acreditamos que as artes marciais transformam vidas — elas ensinam disciplina, respeito, perseverança e confiança. Por isso, oferecemos programas para adultos e crianças, sempre com atenção individualizada e segurança em primeiro lugar.</p>
+
+          <div class="quem-somos__highlight">
+            <p>"Mais que uma equipe, uma família." É assim que nossos alunos e a comunidade descrevem a experiência na BTT Porto Seguro. Esse espírito de camaradagem é o que nos move todos os dias.</p>
+          </div>
+
+          <div class="quem-somos__master">
+            <div class="quem-somos__master-info">
+              <div class="quem-somos__master-name">Mestre Eliandro Rodrigues</div>
+              <div class="quem-somos__master-title">Eliandro Ninja — Fundador & Instrutor Principal</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quem-somos__visual">
+          <img src="foto-academia.jpg" alt="Academia BTT Porto Seguro" class="quem-somos__image" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       TRADIÇÃO E METODOLOGIA
+       ========================================== -->
+  <section id="tradicao-metodologia" class="section tradicao-metodo" aria-labelledby="tradicao-metodo-title">
+    <div class="container">
+      <h2 id="tradicao-metodo-title" class="section-title" style="text-align:center;">Tradição e <span>Metodologia</span></h2>
+      <p class="section-subtitle" style="text-align:center;">Quem está por trás da nossa metodologia — fundadores lendários e o professor que te ensina no dia a dia</p>
+
+      <div class="tradicao-metodo__grid">
+
+        <!-- Founder 1: Murilo Bustamante -->
+        <article class="tradicao-metodo-card">
+          <div class="tradicao-metodo-card__image tradicao-metodo-card__image--murilo" role="img" aria-label="Murilo Bustamante — Fundador e líder da Brazilian Top Team">
+            <img src="hero-murilo.jpg" alt="Murilo Bustamante" class="tradicao-metodo-card__img" loading="lazy">
+          </div>
+          <div class="tradicao-metodo-card__content">
+            <span class="tradicao-metodo-card__eyebrow">Fundador e líder da Brazilian Top Team</span>
+            <h3 class="tradicao-metodo-card__name">Murilo <br>Bustamante</h3>
+            <p class="tradicao-metodo-card__desc">
+              Co-fundador e atual líder do <strong>Brazilian Top Team (BTT)</strong>, fundado em 2000 ao lado de Ricardo Libório, Mário Sperry e Luis Roberto Duarte. Primeiro brasileiro a conquistar um título do UFC — Campeão dos Médios (<strong>UFC 35, 2002</strong>) — com a linhagem de faixa-preta vinda de Carlson Gracie. Recebeu a faixa coral (7º grau) de BJJ, em reconhecimento a décadas dedicadas ao jiu-jitsu, e já formou mais de 100 faixas-pretas ao longo da carreira.
+            </p>
+            <p class="tradicao-metodo-card__note"><strong>Na BTT Porto Seguro, seguimos a metodologia oficial de treino da Brazilian Top Team, desenvolvida e liderada por Murilo Bustamante.</strong></p>
+            <ul class="tradicao-metodo-card__badges" role="list">
+              <li><span class="tradicao-metodo-badge">UFC Champion</span></li>
+              <li><span class="tradicao-metodo-badge">7th Degree Coral Belt</span></li>
+              <li><span class="tradicao-metodo-badge">+100 Black Belts</span></li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Founder 2: Acelino "Popó" Freitas -->
+        <article class="tradicao-metodo-card">
+          <div class="tradicao-metodo-card__image tradicao-metodo-card__image--popo" role="img" aria-label="Acelino Popó Freitas — Fundador da rede Popó Mão de Pedra">
+            <img src="hero-popo.jpg" alt="Acelino Popó Freitas" class="tradicao-metodo-card__img" loading="lazy">
+          </div>
+          <div class="tradicao-metodo-card__content">
+            <span class="tradicao-metodo-card__eyebrow tradicao-metodo-card__eyebrow--gold">Fundador da rede Popó Mão de Pedra</span>
+            <h3 class="tradicao-metodo-card__name">Acelino <br>"Popó" <br>Freitas</h3>
+            <p class="tradicao-metodo-card__desc">
+              <strong>Tetracampeão mundial de boxe</strong> (1999, 2002, 2004 e 2006) em duas categorias — super-pena e leve — e supercampeão mundial unificado, com títulos pelas quatro principais organizações do boxe (<strong>WBO, WBA, WBC e IBF</strong>). Conhecido pelo apelido "Mão de Pedra", com uma das mais longas sequências de vitórias por nocaute consecutivas da história do boxe. Fundador da rede de academias <strong>"Popó Mão de Pedra"</strong>, com unidades em diversos estados do Brasil.
+            </p>
+            <p class="tradicao-metodo-card__note"><strong>Nossas aulas de boxe seguem a metodologia da Popó Mão de Pedra, criada pelo tetracampeão mundial Acelino "Popó" Freitas.</strong></p>
+            <ul class="tradicao-metodo-card__badges" role="list">
+              <li><span class="tradicao-metodo-badge tradicao-metodo-badge--gold">4x World Champ</span></li>
+              <li><span class="tradicao-metodo-badge tradicao-metodo-badge--gold">All 4 Belts</span></li>
+              <li><span class="tradicao-metodo-badge tradicao-metodo-badge--gold">Mão de Pedra</span></li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Day-to-day Instructor: Mestre Eliandro Rodrigues -->
+        <article class="tradicao-metodo-card tradicao-metodo-card--featured">
+          <div class="tradicao-metodo-card__image tradicao-metodo-card__image--solo" role="img" aria-label="Mestre Eliandro Rodrigues — Professor do dia a dia">
+            <img src="mestre-eliandro.jpg" alt="Mestre Eliandro Rodrigues — Professor do dia a dia" class="tradicao-metodo-card__img" loading="lazy">
+            <div class="tradicao-metodo-card__pin" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.18 21 12 16.27 5.82 21l2.36-7.14L2 9.36h7.61z"/>
+              </svg>
+              <span>Seu Professor</span>
+            </div>
+          </div>
+          <div class="tradicao-metodo-card__content">
+            <span class="tradicao-metodo-card__eyebrow tradicao-metodo-card__eyebrow--gold">Quem vai te ensinar no dia a dia</span>
+            <h3 class="tradicao-metodo-card__name">Mestre Eliandro <br>Rodrigues</h3>
+            <p class="tradicao-metodo-card__desc">
+              O coração da BTT Porto Seguro. As aulas são conduzidas pelo <strong>Mestre Eliandro Rodrigues</strong>, o "Eliandro Ninja" — figura conhecida na região pelo jeito mão na massa e pelo ensino estilo família, em que cada aluno é acompanhado de perto. Quando necessário, outros instrutores qualificados da equipe podem assumir as turmas no lugar dele, mas a maioria das aulas é ministrada por ele mesmo.
+            </p>
+            <p class="tradicao-metodo-card__note"><strong>Mestre Eliandro comanda os treinamentos com a filosofia de transformar vidas através das artes marciais — disciplina, respeito e perseverança em cada aula.</strong></p>
+            <ul class="tradicao-metodo-card__badges" role="list">
+              <li><span class="tradicao-metodo-badge tradicao-metodo-badge--gold">Faixa Preta</span></li>
+              <li><span class="tradicao-metodo-badge tradicao-metodo-badge--gold">Instrutor Principal</span></li>
+              <li><span class="tradicao-metodo-badge tradicao-metodo-badge--gold">Fundador BTT Porto Seguro</span></li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       MODALIDADES
+       ========================================== -->
+  <section id="modalidades" class="section" aria-labelledby="modalidades-title">
+    <div class="container">
+      <h2 id="modalidades-title" class="section-title" style="text-align:center;">Modalidades</h2>
+      <p class="section-subtitle" style="text-align:center;">Conheça nossas modalidades e escolha a sua</p>
+
+      <div class="modalidades__grid">
+
+        <!-- Jiu-Jitsu Adulto -->
+        <article class="modalidade-card">
+          <div class="modalidade-card__image modalidade-card__image--jj" role="img" aria-label="Jiu-Jitsu Adulto">
+            <img src="modalidade-jiu-jitsu.jpg" alt="Jiu-Jitsu Adulto" class="modalidade-card__img" loading="lazy">
+          </div>
+          <div class="modalidade-card__content">
+            <h3 class="modalidade-card__title">Jiu-Jitsu</h3>
+            <div class="modalidade-card__subtitle">Adulto</div>
+          </div>
+        </article>
+
+        <!-- Jiu-Jitsu Infantil -->
+        <article class="modalidade-card">
+          <div class="modalidade-card__image modalidade-card__image--bjj" role="img" aria-label="Jiu-Jitsu Infantil">
+            <img src="modalidade-jiu-jitsu-infantil.jpg" alt="Jiu-Jitsu Infantil" class="modalidade-card__img" loading="lazy">
+          </div>
+          <div class="modalidade-card__content">
+            <h3 class="modalidade-card__title">Jiu-Jitsu</h3>
+            <div class="modalidade-card__subtitle">Infantil</div>
+          </div>
+        </article>
+
+        <!-- Boxe -->
+        <article class="modalidade-card">
+          <div class="modalidade-card__image modalidade-card__image--boxe" role="img" aria-label="Boxe">
+            <img src="modalidade-boxe.jpg" alt="Boxe" class="modalidade-card__img" loading="lazy">
+          </div>
+          <div class="modalidade-card__content">
+            <h3 class="modalidade-card__title">Boxe</h3>
+            <div class="modalidade-card__subtitle">Todos os níveis</div>
+          </div>
+        </article>
+
+        <!-- MMA -->
+        <article class="modalidade-card">
+          <div class="modalidade-card__image modalidade-card__image--mma" role="img" aria-label="MMA">
+            <img src="modalidade-mma.jpg" alt="MMA" class="modalidade-card__img" loading="lazy">
+          </div>
+          <div class="modalidade-card__content">
+            <h3 class="modalidade-card__title">MMA</h3>
+            <div class="modalidade-card__subtitle">Mixed Martial Arts</div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       HORÁRIOS
+       ========================================== -->
+  <section id="horarios" class="section" aria-labelledby="horarios-title">
+    <div class="container">
+      <h2 id="horarios-title" class="section-title" style="text-align:center;">Horários</h2>
+      <p class="section-subtitle" style="text-align:center;">Calendário semanal de aulas</p>
+
+      <div class="horarios__group">
+        <h3 class="horarios__group-title">Jiu-Jitsu</h3>
+        <div class="horarios__table-wrapper" role="region" aria-label="Tabela de horários de Jiu-Jitsu" tabindex="0">
+          <table class="horarios__table">
+            <caption class="visually-hidden">Horários das turmas de Jiu-Jitsu</caption>
+            <thead>
+              <tr>
+                <th scope="col">Turma</th>
+                <th scope="col">Dias</th>
+                <th scope="col">Horário</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="horarios__class-name">Kids 1 (5 a 8 anos)</span></td>
+                <td>Segunda, Quarta, Sexta</td>
+                <td>18h30 às 19h30</td>
+              </tr>
+              <tr>
+                <td><span class="horarios__class-name">Kids 2 e Adultos</span></td>
+                <td>Segunda, Quarta, Sexta</td>
+                <td>19h30 às 21h00</td>
+              </tr>
+              <tr>
+                <td><span class="horarios__class-name">Kids 2 e Adultos</span></td>
+                <td>Terça e Quinta</td>
+                <td>10h00 às 11h00</td>
+              </tr>
+              <tr>
+                <td><span class="horarios__class-name">Kids 2 e Adultos</span></td>
+                <td>Terça e Quinta</td>
+                <td>15h00 às 16h00</td>
+              </tr>
+              <tr>
+                <td><span class="horarios__class-name">Kids 1 e Kids 2</span></td>
+                <td>Terça e Quinta</td>
+                <td>16h00 às 17h30</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="horarios__group">
+        <h3 class="horarios__group-title">Boxe</h3>
+        <div class="horarios__table-wrapper" role="region" aria-label="Tabela de horários de Boxe" tabindex="0">
+          <table class="horarios__table">
+            <caption class="visually-hidden">Horários das turmas de Boxe</caption>
+            <thead>
+              <tr>
+                <th scope="col">Turma</th>
+                <th scope="col">Dias</th>
+                <th scope="col">Horário</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="horarios__class-name">Boxe</span></td>
+                <td>Terça e Quinta</td>
+                <td>06h30 às 07h30</td>
+              </tr>
+              <tr>
+                <td><span class="horarios__class-name">Boxe</span></td>
+                <td>Terça e Quinta</td>
+                <td>18h30 às 19h30</td>
+              </tr>
+              <tr>
+                <td><span class="horarios__class-name">Boxe</span></td>
+                <td>Sábado</td>
+                <td>06h30 às 07h30</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider section-divider--mobile-only"></div>
+
+  <!-- ==========================================
+       FAQ
+       ========================================== -->
+  <section id="faq" class="section" aria-labelledby="faq-title">
+    <div class="container">
+      <h2 id="faq-title" class="section-title" style="text-align:center;">Perguntas <span>Frequentes</span></h2>
+      <p class="section-subtitle" style="text-align:center;">Tire suas dúvidas sobre a academia</p>
+
+      <div class="faq__list" role="list">
+
+        <div class="faq__item" role="listitem">
+          <button class="faq__question" aria-expanded="false">
+            Qual o valor da mensalidade?
+            <span class="faq__icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq__answer" aria-hidden="true">
+            <div class="faq__answer-inner">
+              <span class="todo">TODO: Preencher com o valor real das mensalidades.</span> Os valores variam de acordo com a modalidade e o plano escolhido (mensal, trimestral ou anual). Entre em contato pelo WhatsApp para receber a tabela completa de preços e condições especiais.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item" role="listitem">
+          <button class="faq__question" aria-expanded="false">
+            Nunca fiz aula de luta — posso me matricular?
+            <span class="faq__icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq__answer" aria-hidden="true">
+            <div class="faq__answer-inner">
+              Claro! Nossos programas são abertos para todos os níveis — de iniciantes completos a atletas competitivos. Cada modalidade tem turmas específicas para quem está começando, com atenção especial à técnica básica e segurança. Venha experimentar uma aula gratuita e conhecer nosso espaço!
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item" role="listitem">
+          <button class="faq__question" aria-expanded="false">
+            Onde posso estacionar?
+            <span class="faq__icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq__answer" aria-hidden="true">
+            <div class="faq__answer-inner">
+              <span class="todo">TODO: Confirmar opções de estacionamento na região.</span> A academia fica em uma região de fácil acesso no centro de Porto Seguro. Há estacionamento público nas proximidades e, em alguns horários, é possível estacionar na própria rua. Informe-se na recepção sobre as melhores opções para cada turno.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item" role="listitem">
+          <button class="faq__question" aria-expanded="false">
+            Posso fazer aula com personal trainer?
+            <span class="faq__icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq__answer" aria-hidden="true">
+            <div class="faq__answer-inner">
+              <span class="todo">TODO: Confirmar se a academia oferece personal trainer.</span> Sim! Oferecemos aulas em formato personal trainer para quem prefere um atendimento mais individualizado, com foco em objetivos específicos — perda de peso, preparação para competição, reabilitação, etc. Consulte disponibilidade e valores pelo WhatsApp.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ==========================================
+       CONTATOS
+       ========================================== -->
+  <section id="contatos" class="section" aria-labelledby="contatos-title">
+    <div class="container">
+      <h2 id="contatos-title" class="section-title" style="text-align:center;">Contatos</h2>
+      <p class="section-subtitle" style="text-align:center;">Fale conosco ou venha nos visitar</p>
+
+      <div class="contatos__grid">
+
+        <!-- Left column: info -->
+        <div class="contatos__info">
+
+          <!-- Address -->
+          <div class="contatos__item">
+            <div class="contatos__item-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contatos__item-label">Endereço</div>
+              <div class="contatos__item-value">R. Adelar Maria de Andrade, 135<br>Porto Seguro, BA — 45810-000</div>
+            </div>
+          </div>
+
+          <!-- Instagram -->
+          <div class="contatos__item">
+            <div class="contatos__item-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contatos__item-label">Instagram</div>
+              <div class="contatos__item-value">
+                <a href="https://instagram.com/btt_bahia" target="_blank" rel="noopener noreferrer" aria-label="Siga-nos no Instagram @btt_bahia">
+                  @btt_bahia
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- WhatsApp -->
+          <div class="contatos__item">
+            <div class="contatos__item-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contatos__item-label">WhatsApp</div>
+              <div class="contatos__item-value">
+                <a href="https://wa.me/5573999917430" target="_blank" rel="noopener noreferrer" aria-label="Entrar em contato pelo WhatsApp: +55 73 99991-7430">
+                  +55 73 99991-7430
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- WhatsApp CTA button -->
+          <a href="https://wa.me/5573999917430" target="_blank" rel="noopener noreferrer" class="contatos__whatsapp-btn" aria-label="Fale conosco pelo WhatsApp: +55 73 99991-7430">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Fale pelo WhatsApp
+          </a>
+
+          <!-- Map -->
+          <div class="contatos__map" aria-label="Mapa da localização da academia">
+            <iframe
+              src="https://maps.google.com/maps?q=R.%20Adelar%20Maria%20de%20Andrade%2C%20135%20-%20Campinho%2C%20Porto%20Seguro%20-%20BA%2C%2045810-000&t=&z=17&ie=UTF8&iwloc=&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Localização da BTT Porto Seguro no mapa"
+              aria-hidden="false">
+            </iframe>
+          </div>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=R.+Adelar+Maria+de+Andrade,+135,+Campinho,+Porto+Seguro,+BA,+45810-000" target="_blank" rel="noopener noreferrer" class="contatos__social-link" style="margin-top: 0.75rem; display: inline-flex;" aria-label="Como chegar à BTT Porto Seguro no Google Maps">
+            Como chegar no Google Maps →
+          </a>
+
+        </div>
+
+        <!-- Right column: Contact form -->
+        <div class="contatos__form" aria-label="Formulário de contato">
+          <h3 style="font-family: var(--font-display); font-size: var(--text-2xl); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: var(--space-6);">Envie sua mensagem</h3>
+
+          <form id="contact-form" novalidate>
+            <div class="form-group">
+              <label for="name" class="form-label">Nome completo</label>
+              <input type="text" id="name" name="name" class="form-input" placeholder="Seu nome" autocomplete="name" required aria-required="true">
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="form-label">E-mail</label>
+              <input type="email" id="email" name="email" class="form-input" placeholder="seu@email.com" autocomplete="email" required aria-required="true">
+            </div>
+
+            <div class="form-group">
+              <label for="message" class="form-label">Mensagem</label>
+              <textarea id="message" name="message" class="form-textarea" placeholder="Escreva sua mensagem..." required aria-required="true"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--large" style="width: 100%;">Enviar Mensagem</button>
+          </form>
+
+          <div id="form-success" style="display:none; margin-top: var(--space-4); padding: var(--space-4); background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: var(--radius-md); color: #4ade80; font-size: var(--text-sm); text-align: center;" role="alert">
+            Mensagem enviada com sucesso! Entraremos em contato em breve.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+
+      <div class="footer__logo">
+        <img src="btt-logo.png" alt="Brazilian Top Team Porto Seguro" class="footer__logo-img">
+      </div>
+
+      <div class="footer__info">
+        <strong>BTT Porto Seguro – Boxe, Jiu-Jitsu, MMA</strong><br>
+        R. Adelar Maria de Andrade, 135 — Porto Seguro, BA — 45810-000
+      </div>
+
+      <div class="footer__divider" aria-hidden="true"></div>
+
+      <p class="footer__copy">
+        &copy; <span id="year"></span> <span>BTT Porto Seguro</span> – Boxe, Jiu-Jitsu, MMA.<br>
+        Todos os direitos reservados.
+      </p>
+
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       JAVASCRIPT
+       ========================================== -->
+  <script>
+    (() => {
+      'use strict';
+
+      // ── Year in footer ──────────────────────────
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // ── Mobile nav toggle ──────────────────────
+      const navToggle = document.querySelector('.nav__toggle');
+      const mobileMenu = document.querySelector('.nav__mobile');
+      const mobileLinks = document.querySelectorAll('.nav__mobile-link, .nav__mobile .btn');
+
+      function closeMobileMenu() {
+        navToggle.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      navToggle.addEventListener('click', () => {
+        const isOpen = navToggle.classList.toggle('active');
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+        mobileMenu.classList.toggle('active');
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+
+      mobileLinks.forEach(link => link.addEventListener('click', closeMobileMenu));
+
+      // ── Sticky nav active link on scroll ────────
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav__link');
+
+      function updateActiveNav() {
+        const scrollPos = window.scrollY + 80;
+        let current = '';
+
+        sections.forEach(section => {
+          const top = section.offsetTop;
+          const height = section.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', updateActiveNav, { passive: true });
+
+      // ── Hero slider ────────────────────────────
+      // 2 backgrounds push behind a fixed 2-panel content layer.
+      // Slide 1 = kids single (kids-1), slide 2 = split (kids-2 + kids-3), slide 3 = master.
+      const slides = document.querySelectorAll('.hero__slide');
+      const kidsContent = document.querySelector('.hero__content--kids');
+      const masterContent = document.querySelector('.hero__content--master');
+      const prevArrow = document.querySelector('.hero__arrow--prev');
+      const nextArrow = document.querySelector('.hero__arrow--next');
+      let currentSlide = 0;
+      let slideInterval;
+
+      function goToSlide(index) {
+        const prevIndex = currentSlide;
+        // Wrap around (3 backgrounds: kids single, kids split, master)
+        index = (index + slides.length) % slides.length;
+        slides.forEach((slide, i) => {
+          // Mark the outgoing slide so it gets pushed out to the left
+          if (i === prevIndex && i !== index) {
+            slide.classList.remove('active');
+            slide.classList.add('hero__slide--prev');
+            // Clean up the prev class once the push transition finishes
+            setTimeout(() => {
+              slide.classList.remove('hero__slide--prev');
+            }, 700);
+          } else {
+            slide.classList.remove('hero__slide--prev');
+          }
+          // Activate the new slide
+          slide.classList.toggle('active', i === index);
+        });
+        // Fixed header: kids copy for slides 1-2, master copy for slide 3.
+        // Kids copy covers the kids slides, master copy covers the last slide.
+        // Fixed copy: kids text stays put across the kids slides and only
+        // swaps when the master image appears. Backgrounds alone animate.
+        const isMaster = index === slides.length - 1;
+        if (kidsContent) kidsContent.classList.toggle('active', !isMaster);
+        if (masterContent) masterContent.classList.toggle('active', isMaster);
+        currentSlide = index;
+      }
+
+      function nextSlide() {
+        goToSlide(currentSlide + 1);
+      }
+
+      function prevSlide() {
+        goToSlide(currentSlide - 1);
+      }
+
+      function startSlider() {
+        stopSlider();
+        slideInterval = setInterval(nextSlide, 5000);
+      }
+
+      function stopSlider() {
+        clearInterval(slideInterval);
+      }
+
+      if (prevArrow) {
+        prevArrow.addEventListener('click', () => {
+          stopSlider();
+          prevSlide();
+          startSlider();
+        });
+      }
+
+      if (nextArrow) {
+        nextArrow.addEventListener('click', () => {
+          stopSlider();
+          nextSlide();
+          startSlider();
+        });
+      }
+
+      // ── Touch swipe (mobile): swipe left = next, swipe right = previous ──
+      const sliderEl = document.querySelector('.hero__slider');
+      if (sliderEl) {
+        let touchStartX = null;
+        const SWIPE_THRESHOLD = 40;
+        sliderEl.addEventListener('touchstart', (e) => {
+          if (e.touches.length === 1) touchStartX = e.touches[0].clientX;
+        }, { passive: true });
+        sliderEl.addEventListener('touchend', (e) => {
+          if (touchStartX === null) return;
+          const dx = e.changedTouches[0].clientX - touchStartX;
+          touchStartX = null;
+          if (Math.abs(dx) < SWIPE_THRESHOLD) return;
+          stopSlider();
+          if (dx < 0) nextSlide();
+          else prevSlide();
+          startSlider();
+        }, { passive: true });
+      }
+
+      // Pause on visibility change
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stopSlider();
+        else startSlider();
+      });
+
+      // Replay slide 1 entrance on page open: park it off-screen, then
+      // re-activate after first paint so the transition effect plays on
+      // the first slide too (desktop: pushes in from the right,
+      // mobile: fades in). rAF waits if the tab opens in background.
+      if (slides.length && sliderEl) {
+        const firstSlide = slides[0];
+        const firstInner = firstSlide.querySelector('.hero__slide-inner');
+        firstSlide.classList.remove('active');
+        if (firstInner) firstInner.style.transition = 'none';
+        void sliderEl.offsetWidth;
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          if (firstInner) firstInner.style.transition = '';
+          firstSlide.classList.add('active');
+        }));
+      }
+
+      startSlider();
+
+      // Fire the first push transition right after the first slide paints,
+      // then fall back to the regular 5s rhythm.
+      setTimeout(() => {
+        if (document.hidden) return;
+        stopSlider();
+        nextSlide();
+        startSlider();
+      }, 1800);
+
+      // ── Testimonials marquee (4x duplication for seamless infinite loop) ──
+      const testimonials = [
+        { name: "Ana Karina Vasconcellos", text: "Melhor professor da região. Um profissional muito qualificado, sempre se atualizando. É uma honra treinar com esse mestre!" },
+        { name: "Martha Matos", text: "Academia TOP!! Profissionalismo 100% e ao mesmo tempo um clima de família!!! 1000/1000" },
+        { name: "Thayanne Sá", text: "Mais que uma equipe, uma família! Ensinando, incentivando, nunca desistindo do aluno. Nosso pequeno não vive mais sem a família BTT Porto Seguro!" },
+        { name: "Davi Lira de Souza", text: "Um excelente professor, não é apenas um mestre, mas também um amigo e uma figura paterna, cuidando de cada aluno como se fosse seu próprio filho." },
+        { name: "João Portela", text: "Poucos sabem passar a arte marcial de forma tão pedagógica e didática quanto o Mestre Eliandro, porque ele faz isso com simplicidade." },
+        { name: "Ricardo Fortuna", text: "O Mestre Eliandro nos conduz à evolução técnica com muita inteligência e naturalidade, a ponto de absorvermos o conhecimento sem nem perceber." },
+        { name: "Ubaldino Junior", text: "A BTT em Porto Seguro é muito bem representada pelo Professor Eliandro Ninja, sempre se atualizando e trazendo o melhor para seus alunos." },
+        { name: "Allan Cabral", text: "O ambiente é muito bem organizado, o professor é nota 10! As aulas são dinâmicas e muito bem ministradas." },
+        { name: "Marcello Bertolucio", text: "Melhor academia de boxe e jiu-jitsu de Porto Seguro, instrutores excelentes. Você realmente se sente parte da família com esse grupo." },
+        { name: "Quinten Oerlemans", text: "A academia merece sua nota máxima, equipe simpática e ótimo ensino." },
+        { name: "Bruna Cunha", text: "A melhor 💪💯🎯 do extremo sul da Bahia!" }
+      ];
+
+      const track = document.getElementById('testimonials-track');
+      if (track) {
+        const starSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
+        const escapeHtml = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        let cardsHtml = '';
+        for (let setIndex = 0; setIndex < 4; setIndex++) {
+          testimonials.forEach((t) => {
+            cardsHtml += '<article class="testimonial-card">'
+              + '<h3 class="testimonial-card__name">' + escapeHtml(t.name) + '</h3>'
+              + '<div class="testimonial-card__stars" aria-label="5 de 5 estrelas">' + starSvg.repeat(5) + '</div>'
+              + '<p class="testimonial-card__text">' + escapeHtml(t.text) + '</p>'
+              + '</article>';
+          });
+        }
+        track.innerHTML = cardsHtml;
+      }
+
+      // ── FAQ accordion ──────────────────────────
+      const faqItems = document.querySelectorAll('.faq__item');
+
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq__question');
+
+        question.addEventListener('click', () => {
+          const isOpen = item.classList.contains('active');
+
+          // Close all others
+          faqItems.forEach(other => {
+            other.classList.remove('active');
+            other.querySelector('.faq__question').setAttribute('aria-expanded', 'false');
+            other.querySelector('.faq__answer').setAttribute('aria-hidden', 'true');
+          });
+
+          // Toggle current
+          if (!isOpen) {
+            item.classList.add('active');
+            question.setAttribute('aria-expanded', 'true');
+            item.querySelector('.faq__answer').setAttribute('aria-hidden', 'false');
+          }
+        });
+      });
+
+      // ── Contact form ──────────────────────────
+      const contactForm = document.getElementById('contact-form');
+      const formSuccess = document.getElementById('form-success');
+
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const name = contactForm.querySelector('#name').value.trim();
+        const email = contactForm.querySelector('#email').value.trim();
+        const message = contactForm.querySelector('#message').value.trim();
+
+        if (!name || !email || !message) {
+          // Simple inline validation feedback
+          contactForm.querySelectorAll('[required]').forEach(field => {
+            if (!field.value.trim()) {
+              field.style.borderColor = 'var(--color-primary)';
+            } else {
+              field.style.borderColor = '';
+            }
+          });
+          return;
+        }
+
+        // Simulate submission (replace with real endpoint)
+        const submitBtn = contactForm.querySelector('[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviando...';
+
+        setTimeout(() => {
+          contactForm.reset();
+          formSuccess.style.display = 'block';
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Enviar Mensagem';
+
+          // Hide success after 5s
+          setTimeout(() => {
+            formSuccess.style.display = 'none';
+          }, 5000);
+        }, 1000);
+      });
+
+      // Remove red border on input
+      contactForm.querySelectorAll('.form-input, .form-textarea').forEach(field => {
+        field.addEventListener('input', () => {
+          field.style.borderColor = '';
+        });
+      });
+
+      // ── Smooth scroll (fallback for browsers without CSS scroll-behavior) ──
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', (e) => {
+          const target = document.querySelector(anchor.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Close mobile menu if open
+            closeMobileMenu();
+          }
+        });
+      });
+
+    })();
+  </script>
+
+</body>
+</html>
