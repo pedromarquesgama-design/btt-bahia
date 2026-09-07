@@ -521,6 +521,24 @@
       overflow: hidden;
     }
 
+    /* Melting middle seam where the two kids photos meet (desktop: vertical) */
+    .hero__slide-bg--kids-split::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 60px;
+      transform: translateX(-50%);
+      background: linear-gradient(to right, transparent, rgba(15, 15, 18, 0.35) 30%, rgba(15, 15, 18, 0.35) 70%, transparent);
+      -webkit-backdrop-filter: blur(3px);
+      backdrop-filter: blur(3px);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 25%, black 75%, transparent);
+      mask-image: linear-gradient(to right, transparent, black 25%, black 75%, transparent);
+      z-index: 1;
+      pointer-events: none;
+    }
+
     .hero__kids-pic {
       flex: 1 1 50%;
       min-width: 0;
@@ -547,6 +565,20 @@
       background-position: center top;
       background-repeat: no-repeat;
       background-color: #1a1a1a; /* fallback while image loads */
+    }
+
+    /* Bottom faded edge on kids-1 and master-solo so each photo melts into the next section */
+    .hero__slide-bg--kids-single::after,
+    .hero__slide-bg--master::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 140px;
+      background: linear-gradient(to bottom, transparent, rgba(15, 15, 18, 0.85));
+      z-index: 1;
+      pointer-events: none;
     }
 
     /* Fixed content layer above the sliding backgrounds.
@@ -948,14 +980,14 @@
       background: transparent;
       border-radius: var(--radius-lg);
       overflow: hidden;
-      border: 1px solid transparent;
+      border: 1px solid rgba(245, 158, 11, 0.55);
       transition: all var(--transition-base);
     }
 
     .modalidade-card:hover {
       transform: translateY(-4px);
-      border-color: transparent;
-      box-shadow: none;
+      border-color: var(--color-gold);
+      box-shadow: 0 12px 32px rgba(245, 158, 11, 0.18);
     }
 
     .modalidade-card__image {
@@ -1002,14 +1034,15 @@
     .modalidade-card__image--boxe .modalidade-card__img {
       object-fit: contain;
       background: #fff;
-      /* Source file has large white margins: zoom so the emblem
-         nearly touches the banner edges */
-      transform: scale(2.3);
+      /* Source is portrait with the circular emblem in the middle ~56%
+         of the height: zoom just enough to fill the banner with the
+         whole badge, no cropped text */
+      transform: scale(1.75);
       transform-origin: center;
     }
 
     .modalidade-card:hover .modalidade-card__image--boxe .modalidade-card__img {
-      transform: scale(2.42);
+      transform: scale(1.85);
     }
 
     .modalidade-card__content {
@@ -1100,6 +1133,14 @@
     .tradicao-metodo-card--featured:hover {
       border-color: var(--color-gold-light);
       box-shadow: 0 16px 40px rgba(245, 158, 11, 0.25);
+    }
+
+    /* Founder cards (Murilo + Popó): red border */
+    .tradicao-metodo-card:not(.tradicao-metodo-card--featured) {
+      border-color: rgba(220, 38, 38, 0.6);
+    }
+    .tradicao-metodo-card:not(.tradicao-metodo-card--featured):hover {
+      border-color: var(--color-primary);
     }
 
     .tradicao-metodo-card__image {
@@ -1241,6 +1282,30 @@
       color: var(--color-gold);
       border-color: rgba(245, 158, 11, 0.3);
       background: rgba(245, 158, 11, 0.08);
+    }
+
+    /* Popó card badges: red instead of gold */
+    .tradicao-metodo__grid > article:nth-child(2) .tradicao-metodo-badge--gold {
+      color: var(--color-primary);
+      border-color: rgba(220, 38, 38, 0.35);
+      background: rgba(220, 38, 38, 0.08);
+    }
+    .tradicao-metodo__grid > article:nth-child(2):hover .tradicao-metodo-badge--gold {
+      border-color: var(--color-primary);
+      color: var(--color-secondary);
+      background: rgba(220, 38, 38, 0.15);
+    }
+
+    /* Murilo card badges: red as well */
+    .tradicao-metodo__grid > article:nth-child(1) .tradicao-metodo-badge {
+      color: var(--color-primary);
+      border-color: rgba(220, 38, 38, 0.35);
+      background: rgba(220, 38, 38, 0.08);
+    }
+    .tradicao-metodo__grid > article:nth-child(1):hover .tradicao-metodo-badge {
+      border-color: var(--color-primary);
+      color: var(--color-secondary);
+      background: rgba(220, 38, 38, 0.15);
     }
 
     .tradicao-metodo-card--featured:hover .tradicao-metodo-badge--gold {
@@ -1886,6 +1951,16 @@
       background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-gold) 50%, transparent 100%);
     }
 
+    /* Horários → FAQ divider: soft tonal fade, all screen sizes */
+    .section-divider--mobile-only {
+      display: block;
+      height: 80px;
+      background: linear-gradient(to bottom, var(--color-background-alt), var(--color-background));
+      /* Overlap neighbors 1px so no hairline renders at either edge */
+      margin-top: -1px;
+      margin-bottom: -1px;
+    }
+
     /* =============================================
        TODO BADGE
        ============================================= */
@@ -1909,11 +1984,15 @@
        sniffing) so Chrome/Android + Safari/iOS behave the same.
        ============================================= */
     @media (max-width: 767px) {
-      /* — 1) HERO SLIDER: contain (no heavy crop) + dark letterbox — */
+      /* Shrink hero to fit: cap the full-screen min-height so the slider hugs the photos/content */
+      .hero__slider {
+        min-height: min(520px, calc(100svh - var(--nav-height)));
+      }
+      /* — 1) HERO SLIDER: full photos, nothing cut off — */
       .hero__slide-bg--kids-single {
         background-size: contain;
         background-repeat: no-repeat;
-        background-position: center center;
+        background-position: center top;
         background-color: #0F0F12;
       }
       .hero__slide-bg--master {
@@ -1926,18 +2005,54 @@
         flex-direction: column;
         background-color: #0F0F12;
       }
+      /* No seam band on mobile — the melt comes from the overlapping photos below */
+      .hero__slide-bg--kids-split::after {
+        display: none;
+      }
+      /* Stretched halves, no side/middle fades — bottom fade only */
       .hero__kids-pic {
         flex: 1 1 50%;
         min-width: 0;
         min-height: 0;
-        background-size: contain;
+        background-size: 100% 100%;
         background-repeat: no-repeat;
-        background-position: center center;
+        background-position: center top;
         background-color: #0F0F12;
       }
-      /* Override desktop stretch (100% 100%) that distorts pic 1 */
+      /* Mobile: stronger bottom fade so it reads over the dark overlay */
+      .hero__slide-bg--kids-single::after,
+      .hero__slide-bg--master::after {
+        height: 180px;
+        background: linear-gradient(to bottom, transparent, #0F0F12);
+        z-index: 2;
+      }
+      /* Mobile: feather each photo's own bottom edge (contain leaves the
+         image ending well above the container, so the container-bottom
+         fade alone never touches the photo). Stops track 100vw via each
+         photo's aspect ratio: kids-1 = 1302/816, master = 1809/869. */
+      .hero__slide-bg--kids-single {
+        -webkit-mask-image: linear-gradient(to bottom, black calc(100vw / 1.5956 - 70px), transparent calc(100vw / 1.5956));
+        mask-image: linear-gradient(to bottom, black calc(100vw / 1.5956 - 70px), transparent calc(100vw / 1.5956));
+      }
+      .hero__slide-bg--master {
+        -webkit-mask-image: linear-gradient(to bottom, black calc(100vw / 2.0817 - 70px), transparent calc(100vw / 2.0817));
+        mask-image: linear-gradient(to bottom, black calc(100vw / 2.0817 - 70px), transparent calc(100vw / 2.0817));
+      }
+      /* True melt, whisper level: 24px overlap + feathers */
       .hero__kids-pic--1 {
-        background-size: contain;
+        flex: 1.5 1 68%;
+        order: 2;
+        position: relative;
+        z-index: 1;
+        margin-top: -24px;
+        -webkit-mask-image: linear-gradient(to bottom, transparent, black 24px);
+        mask-image: linear-gradient(to bottom, transparent, black 24px);
+      }
+      .hero__kids-pic--2 {
+        flex: 1 1 45%;
+        order: 1;
+        -webkit-mask-image: linear-gradient(to top, transparent, black 24px);
+        mask-image: linear-gradient(to top, transparent, black 24px);
       }
 
       /* — 1b) HERO TRANSITION mobile: single crossfade, no overlap — */
@@ -1962,35 +2077,70 @@
         padding-bottom: calc(var(--space-6) + env(safe-area-inset-bottom, 0px));
         padding-left: calc(var(--container-padding) + env(safe-area-inset-left, 0px));
         padding-right: calc(var(--container-padding) + env(safe-area-inset-right, 0px));
+        min-width: 0;
+        max-width: 100%;
+        overflow-x: hidden;
+        box-sizing: border-box;
       }
       .hero__actions {
         width: 100%;
         max-width: 100%;
+        min-width: 0;
         position: relative;
         z-index: 5;
         padding-bottom: env(safe-area-inset-bottom, 0px);
+        flex-direction: column;
+        align-items: stretch;
+        overflow-x: hidden;
+        box-sizing: border-box;
       }
       .hero__actions .btn {
         width: 100%;
         max-width: 100%;
+        min-width: 0;
         min-height: 48px;
         white-space: normal;
+        overflow-wrap: break-word;
+        word-break: break-word;
         text-align: center;
+        box-sizing: border-box;
+        flex-shrink: 1;
+        padding-left: var(--space-4);
+        padding-right: var(--space-4);
+        font-size: var(--text-sm);
       }
-      /* Keep arrows from covering/trapping taps on the CTA */
+      /* Belt-and-suspenders: never let hero children force horizontal scroll */
+      .hero,
+      .hero__slider,
+      .hero__content-layer {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+      /* No arrows on mobile — swipe with fingers instead */
       .hero__arrow {
-        top: auto;
-        bottom: calc(8px + env(safe-area-inset-bottom, 0px));
-        transform: none;
-        z-index: 4;
+        display: none;
       }
-      .hero__arrow:hover {
-        transform: scale(1.08);
+      /* Mobile menu: shrink contents to fit + fill the viewport */
+      .nav__mobile {
+        gap: var(--space-4);
+        padding: var(--space-6) var(--space-4);
+        overflow-y: auto;
+      }
+      .nav__mobile-link {
+        font-size: var(--text-2xl);
+      }
+      /* Master card names on a single line (mobile): Murilo, Popó, Eliandro */
+      .tradicao-metodo-card__name {
+        white-space: nowrap;
+        font-size: clamp(1.15rem, 5.6vw, var(--text-3xl));
+      }
+      .tradicao-metodo-card__name br {
+        display: none;
       }
 
       /* — 3) TESTIMONIALS MARQUEE: unstick hover-pause, keep looping — */
       .testimonials-marquee__row {
-        --duration: 45s;
+        --duration: 90s;
         flex-wrap: nowrap;
       }
       .testimonials-marquee__track {
@@ -2215,7 +2365,7 @@
           </div>
           <div class="tradicao-metodo-card__content">
             <span class="tradicao-metodo-card__eyebrow">Fundador e líder da Brazilian Top Team</span>
-            <h3 class="tradicao-metodo-card__name">Murilo<br>Bustamante</h3>
+            <h3 class="tradicao-metodo-card__name">Murilo <br>Bustamante</h3>
             <p class="tradicao-metodo-card__desc">
               Co-fundador e atual líder do <strong>Brazilian Top Team (BTT)</strong>, fundado em 2000 ao lado de Ricardo Libório, Mário Sperry e Luis Roberto Duarte. Primeiro brasileiro a conquistar um título do UFC — Campeão dos Médios (<strong>UFC 35, 2002</strong>) — com a linhagem de faixa-preta vinda de Carlson Gracie. Recebeu a faixa coral (7º grau) de BJJ, em reconhecimento a décadas dedicadas ao jiu-jitsu, e já formou mais de 100 faixas-pretas ao longo da carreira.
             </p>
@@ -2235,9 +2385,9 @@
           </div>
           <div class="tradicao-metodo-card__content">
             <span class="tradicao-metodo-card__eyebrow tradicao-metodo-card__eyebrow--gold">Fundador da rede Popó Mão de Pedra</span>
-            <h3 class="tradicao-metodo-card__name">Acelino<br>"Popó"<br>Freitas</h3>
+            <h3 class="tradicao-metodo-card__name">Acelino <br>"Popó" <br>Freitas</h3>
             <p class="tradicao-metodo-card__desc">
-              Ex-pugilista brasileiro, <strong>tetracampeão mundial de boxe</strong> (1999, 2002, 2004 e 2006) em duas categorias — super-pena e leve — e supercampeão mundial unificado, com títulos pelas quatro principais organizações do boxe (<strong>WBO, WBA, WBC e IBF</strong>). Conhecido pelo apelido "Mão de Pedra", com uma das mais longas sequências de vitórias por nocaute consecutivas da história do boxe. Fundador da rede de academias <strong>"Popó Mão de Pedra"</strong>, com unidades em diversos estados do Brasil.
+              <strong>Tetracampeão mundial de boxe</strong> (1999, 2002, 2004 e 2006) em duas categorias — super-pena e leve — e supercampeão mundial unificado, com títulos pelas quatro principais organizações do boxe (<strong>WBO, WBA, WBC e IBF</strong>). Conhecido pelo apelido "Mão de Pedra", com uma das mais longas sequências de vitórias por nocaute consecutivas da história do boxe. Fundador da rede de academias <strong>"Popó Mão de Pedra"</strong>, com unidades em diversos estados do Brasil.
             </p>
             <p class="tradicao-metodo-card__note"><strong>Nossas aulas de boxe seguem a metodologia da Popó Mão de Pedra, criada pelo tetracampeão mundial Acelino "Popó" Freitas.</strong></p>
             <ul class="tradicao-metodo-card__badges" role="list">
@@ -2261,7 +2411,7 @@
           </div>
           <div class="tradicao-metodo-card__content">
             <span class="tradicao-metodo-card__eyebrow tradicao-metodo-card__eyebrow--gold">Quem vai te ensinar no dia a dia</span>
-            <h3 class="tradicao-metodo-card__name">Mestre Eliandro<br>Rodrigues</h3>
+            <h3 class="tradicao-metodo-card__name">Mestre Eliandro <br>Rodrigues</h3>
             <p class="tradicao-metodo-card__desc">
               O coração da BTT Porto Seguro. As aulas são conduzidas pelo <strong>Mestre Eliandro Rodrigues</strong>, o "Eliandro Ninja" — figura conhecida na região pelo jeito mão na massa e pelo ensino estilo família, em que cada aluno é acompanhado de perto. Quando necessário, outros instrutores qualificados da equipe podem assumir as turmas no lugar dele, mas a maioria das aulas é ministrada por ele mesmo.
             </p>
@@ -2418,10 +2568,11 @@
             </tbody>
           </table>
         </div>
-        <p class="horarios__boxe-note"><strong>Treinos de boxe conduzidos pela Equipe Popó · Mão de Pedra, sob o comando do Professor Eliandro ‘Ninja’.</strong></p>
       </div>
     </div>
   </section>
+
+  <div class="section-divider section-divider--mobile-only"></div>
 
   <!-- ==========================================
        FAQ
@@ -2543,33 +2694,20 @@
             <div>
               <div class="contatos__item-label">WhatsApp</div>
               <div class="contatos__item-value">
-                <a href="#" aria-label="Entrar em contato pelo WhatsApp">
-                  <span class="todo">TODO: Número real</span>
+                <a href="https://wa.me/5573999917430" target="_blank" rel="noopener noreferrer" aria-label="Entrar em contato pelo WhatsApp: +55 73 99991-7430">
+                  +55 73 99991-7430
                 </a>
               </div>
             </div>
           </div>
 
           <!-- WhatsApp CTA button -->
-          <a href="#" class="contatos__whatsapp-btn" aria-label="Fale conosco pelo WhatsApp">
+          <a href="https://wa.me/5573999917430" target="_blank" rel="noopener noreferrer" class="contatos__whatsapp-btn" aria-label="Fale conosco pelo WhatsApp: +55 73 99991-7430">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
             </svg>
             Fale pelo WhatsApp
-            <span class="todo">TODO: Número</span>
           </a>
-
-          <!-- Social links -->
-          <div class="contatos__social">
-            <a href="https://instagram.com/btt_bahia" target="_blank" rel="noopener noreferrer" class="contatos__social-link" aria-label="Instagram da BTT Porto Seguro">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-              </svg>
-              @btt_bahia
-            </a>
-          </div>
 
           <!-- Map -->
           <div class="contatos__map" aria-label="Mapa da localização da academia">
@@ -2619,6 +2757,8 @@
     </div>
   </section>
 
+  <div class="section-divider"></div>
+
   <!-- ==========================================
        FOOTER
        ========================================== -->
@@ -2630,16 +2770,14 @@
       </div>
 
       <div class="footer__info">
-        <strong>BTT Porto Seguro – Boxe, Jiu-Jitsu</strong><br>
-        R. Adelar Maria de Andrade, 135 — Porto Seguro, BA — 45810-000<br>
-        <a href="https://instagram.com/btt_bahia" target="_blank" rel="noopener noreferrer">@btt_bahia</a> ·
-        <span class="todo">TODO: WhatsApp</span>
+        <strong>BTT Porto Seguro – Boxe, Jiu-Jitsu, MMA</strong><br>
+        R. Adelar Maria de Andrade, 135 — Porto Seguro, BA — 45810-000
       </div>
 
       <div class="footer__divider" aria-hidden="true"></div>
 
       <p class="footer__copy">
-        &copy; <span id="year"></span> <span>BTT Porto Seguro</span> – Boxe, Jiu-Jitsu.<br>
+        &copy; <span id="year"></span> <span>BTT Porto Seguro</span> – Boxe, Jiu-Jitsu, MMA.<br>
         Todos os direitos reservados.
       </p>
 
@@ -2772,6 +2910,26 @@
           nextSlide();
           startSlider();
         });
+      }
+
+      // ── Touch swipe (mobile): swipe left = next, swipe right = previous ──
+      const sliderEl = document.querySelector('.hero__slider');
+      if (sliderEl) {
+        let touchStartX = null;
+        const SWIPE_THRESHOLD = 40;
+        sliderEl.addEventListener('touchstart', (e) => {
+          if (e.touches.length === 1) touchStartX = e.touches[0].clientX;
+        }, { passive: true });
+        sliderEl.addEventListener('touchend', (e) => {
+          if (touchStartX === null) return;
+          const dx = e.changedTouches[0].clientX - touchStartX;
+          touchStartX = null;
+          if (Math.abs(dx) < SWIPE_THRESHOLD) return;
+          stopSlider();
+          if (dx < 0) nextSlide();
+          else prevSlide();
+          startSlider();
+        }, { passive: true });
       }
 
       // Pause on visibility change
